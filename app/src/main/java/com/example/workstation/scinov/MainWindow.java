@@ -1,9 +1,15 @@
 package com.example.workstation.scinov;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +27,23 @@ public class MainWindow extends AppCompatActivity {
         ajouterVilles();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        final MyAdapter adapter = new MyAdapter(this.cities);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MyAdapter(this.cities));
+        recyclerView.setAdapter(adapter);
+
+        EventViewModel viewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+
+        LiveData<DataSnapshot> liveData = viewModel.getDataSnapshotLiveData();
+
+        liveData.observe(this, new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(@Nullable DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null) {
+                    //update the values of the adapter
+                }
+            }
+        });
+
     }
 
     private void ajouterVilles() {
