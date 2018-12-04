@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 public class MyViewHolder extends RecyclerView.ViewHolder{
 
     private TextView textViewView;
@@ -22,6 +20,5 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
     public void bind(MyObject myObject){
         Log.i("lolilol","lol");
         textViewView.setText(myObject.getText());
-        Picasso.with(imageView.getContext()).load(myObject.getImageUrl()).centerCrop().fit().into(imageView);
     }
 }
