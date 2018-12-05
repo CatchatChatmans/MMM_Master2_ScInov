@@ -47,11 +47,11 @@ public class MainWindow extends AppCompatActivity {
     }
 
     private void ajouterVilles() {
-        cities.add(new MyObject("France","http://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg"));
-        cities.add(new MyObject("Angleterre","http://www.traditours.com/images/Photos%20Angleterre/ForumLondonBridge.jpg"));
-        cities.add(new MyObject("Allemagne","http://tanned-allemagne.com/wp-content/uploads/2012/10/pano_rathaus_1280.jpg"));
-        cities.add(new MyObject("Espagne","http://www.sejour-linguistique-lec.fr/wp-content/uploads/espagne-02.jpg"));
-        cities.add(new MyObject("Italie","http://retouralinnocence.com/wp-content/uploads/2013/05/Hotel-en-Italie-pour-les-Vacances2.jpg"));
-        cities.add(new MyObject("Russie","http://www.choisir-ma-destination.com/uploads/_large_russie-moscou2.jpg"));
+        cities.add(new MyObject("France","https://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg"));
+        cities.add(new MyObject("Angleterre","https://www.traditours.com/images/Photos%20Angleterre/ForumLondonBridge.jpg"));
+        cities.add(new MyObject("Allemagne","https://tanned-allemagne.com/wp-content/uploads/2012/10/pano_rathaus_1280.jpg"));
+        cities.add(new MyObject("Espagne","https://www.sejour-linguistique-lec.fr/wp-content/uploads/espagne-02.jpg"));
+        cities.add(new MyObject("Italie","https://retouralinnocence.com/wp-content/uploads/2013/05/Hotel-en-Italie-pour-les-Vacances2.jpg"));
+        cities.add(new MyObject("Russie","https://www.choisir-ma-destination.com/uploads/_large_russie-moscou2.jpg"));
     }
 }
