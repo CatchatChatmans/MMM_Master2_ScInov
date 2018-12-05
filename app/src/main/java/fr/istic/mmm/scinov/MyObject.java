@@ -1,4 +1,4 @@
-package com.example.workstation.scinov;
+package fr.istic.mmm.scinov;
 
 public class MyObject {
     private String text;

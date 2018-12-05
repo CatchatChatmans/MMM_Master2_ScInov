@@ -1,4 +1,4 @@
-package com.example.workstation.scinov;
+package fr.istic.mmm.scinov;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
