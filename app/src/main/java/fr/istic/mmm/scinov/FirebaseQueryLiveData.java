@@ -1,6 +1,7 @@
 package fr.istic.mmm.scinov;
 
 import android.arch.lifecycle.LiveData;
+import android.os.Handler;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,6 +15,16 @@ public class FirebaseQueryLiveData extends LiveData<DataSnapshot> {
 
     private final Query query;
     private final MyValueEventListener listener = new MyValueEventListener();
+    private boolean listenerRemovePending = false;
+    private final long delay = 2000;
+    private final Handler handler = new Handler();
+    private final Runnable removeListener = new Runnable() {
+        @Override
+        public void run() {
+            query.removeEventListener(listener);
+            listenerRemovePending = false;
+        }
+    };
 
     public FirebaseQueryLiveData(Query query) {
         this.query = query;
@@ -26,19 +37,27 @@ public class FirebaseQueryLiveData extends LiveData<DataSnapshot> {
     @Override
     protected void onActive() {
         Log.d(LOG_TAG, "onActive");
-        query.addValueEventListener(listener);
+        if (listenerRemovePending) {
+            handler.removeCallbacks(removeListener);
+        }
+        else {
+            query.addValueEventListener(listener);
+        }
+        listenerRemovePending = false;
     }
 
     @Override
     protected void onInactive() {
         Log.d(LOG_TAG, "onInactive");
-        query.removeEventListener(listener);
+        handler.postDelayed(removeListener, delay);
+        listenerRemovePending = true;
     }
 
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             setValue(dataSnapshot);
+            Log.i("YOLO", Long.toString(dataSnapshot.getChildrenCount()));
         }
 
         @Override

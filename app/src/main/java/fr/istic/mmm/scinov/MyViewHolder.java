@@ -15,14 +15,14 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
 
     public MyViewHolder(View itemView) {
         super(itemView);
-        textViewView = (TextView) itemView.findViewById(R.id.text);
-        imageView = (ImageView) itemView.findViewById(R.id.image);
+        textViewView = itemView.findViewById(R.id.text);
+        imageView = itemView.findViewById(R.id.image);
     }
 
-    public void bind(MyObject myObject){
+    public void bind(Event event){
         Log.i("lolilol","lol");
-        textViewView.setText(myObject.getText());
-        Picasso.get().load(myObject.getImageUrl()).into(this.imageView);
+        textViewView.setText(event.getName());
+        Picasso.get().load(event.getImageUrl()).into(this.imageView);
 
     }
 }

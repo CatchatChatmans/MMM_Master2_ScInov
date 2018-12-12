@@ -5,14 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    List<MyObject> list;
+    List<Event> list;
 
-    public MyAdapter(List<MyObject> list) {
+    public MyAdapter() {
+        this.list = new ArrayList<>();
+    }
+
+    public void setList(List<Event> list) {
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -23,8 +29,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
-        MyObject myObject = list.get(position);
-        myViewHolder.bind(myObject);
+        Event event = list.get(position);
+        myViewHolder.bind(event);
     }
 
     @Override
