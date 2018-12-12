@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov;
+package fr.istic.mmm.scinov.model;
 
 import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;

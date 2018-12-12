@@ -1,10 +1,16 @@
-package fr.istic.mmm.scinov;
+package fr.istic.mmm.scinov.model;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @IgnoreExtraProperties
-public class Event {
+public class Event implements Parcelable {
 
     private String id;
     private String name;
@@ -20,6 +26,7 @@ public class Event {
     private String hours;
     private String imageUrl;
     private String keywords;
+    private List<Float> geolocation = new ArrayList<>();
 
     public Event() {
     }
@@ -181,6 +188,74 @@ public class Event {
                 ", hours='" + hours + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", keywords='" + keywords + '\'' +
+                ", geolocation='" + geolocation + '\'' +
                 '}';
     }
+
+    @PropertyName("geolocalisation")
+    public List<Float> getGeolocation() {
+        return geolocation;
+    }
+
+    @PropertyName("geolocalisation")
+    public void setGeolocation(List<Float> geolocation) {
+        this.geolocation = geolocation;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected Event(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        type = in.readString();
+        theme = in.readString();
+        link = in.readString();
+        address = in.readString();
+        city = in.readString();
+        zipcode = in.readString();
+        dates = in.readString();
+        descriptionShort = in.readString();
+        description = in.readString();
+        hours= in.readString();
+        imageUrl= in.readString();
+        keywords= in.readString();
+        in.readList(geolocation,null);
+
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(type);
+        dest.writeString(theme);
+        dest.writeString(link);
+        dest.writeString(address);
+        dest.writeString(city);
+        dest.writeString(zipcode);
+        dest.writeString(dates);
+        dest.writeString(descriptionShort);
+        dest.writeString(description);
+        dest.writeString(hours);
+        dest.writeString(imageUrl);
+        dest.writeString(keywords);
+        dest.writeList(geolocation);
+
+    }
+
 }

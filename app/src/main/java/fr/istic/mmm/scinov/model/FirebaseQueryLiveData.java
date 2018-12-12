@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov;
+package fr.istic.mmm.scinov.model;
 
 import android.arch.lifecycle.LiveData;
 import android.os.Handler;
