@@ -40,9 +40,9 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
     public void bind(Event event){
         this.event = event;
         textViewView.setText(event.getName());
-        String secondaryText = event.getType() + " • " + event.getCity() + " • " + new SimpleDateFormat("dd MMMM", Locale.FRENCH).format(event.getDates().get(0));
-        if(event.getDates().size() > 1){
-            secondaryText +=  " (+ " + (event.getDates().size() - 1) + " dates)";
+        String secondaryText = event.getSimpleType() + " • " + event.getCity() + " • " + new SimpleDateFormat("dd MMMM", Locale.FRENCH).format(event.getFormattedDates().get(0));
+        if(event.getFormattedDates().size() > 1){
+            secondaryText +=  " (+ " + (event.getFormattedDates().size() - 1) + " dates)";
         }
         secondaryTextView.setText(secondaryText);
 

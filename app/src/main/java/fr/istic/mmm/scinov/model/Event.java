@@ -23,7 +23,7 @@ public class Event implements Parcelable {
     private String address;
     private String city;
     private String zipcode;
-    private List<Date> dates;
+    private String dates;
     private String descriptionShort;
     private String description;
     private String hours;
@@ -62,14 +62,20 @@ public class Event implements Parcelable {
 
     @PropertyName("type_d_animation")
     public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSimpleType() {
+        String simpleType ="";
         if(type != null){
             String[] res = type.split("\\]");
             if(res.length > 1){
-                this.type = res[1];
+                simpleType = res[1];
             }else{
-                this.type = "";
+                simpleType = "";
             }
         }
+        return simpleType;
     }
 
     @PropertyName("thematiques")
@@ -123,13 +129,16 @@ public class Event implements Parcelable {
     }
 
     @PropertyName("dates")
-
-    public List<Date> getDates() {
+    public String getDates() {
         return dates;
     }
 
     @PropertyName("dates")
     public void setDates(String dates) {
+        this.dates = dates;
+    }
+
+    public List<Date> getFormattedDates() {
         String[] arr = dates.split(";");
         List<Date> list = new ArrayList<>();
         for (String date : arr) {
@@ -139,7 +148,7 @@ public class Event implements Parcelable {
                 e.printStackTrace();
             }
         }
-        this.dates = list;
+        return list;
     }
 
     @PropertyName("description_fr")
@@ -237,7 +246,7 @@ public class Event implements Parcelable {
         address = in.readString();
         city = in.readString();
         zipcode = in.readString();
-        in.readList(dates,null);
+        dates = in.readString();
         descriptionShort = in.readString();
         description = in.readString();
         hours= in.readString();
@@ -269,7 +278,7 @@ public class Event implements Parcelable {
         dest.writeString(address);
         dest.writeString(city);
         dest.writeString(zipcode);
-        dest.writeList(dates);
+        dest.writeString(dates);
         dest.writeString(descriptionShort);
         dest.writeString(description);
         dest.writeString(hours);
