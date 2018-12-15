@@ -6,7 +6,10 @@ import android.os.Parcelable;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @IgnoreExtraProperties
@@ -20,13 +23,14 @@ public class Event implements Parcelable {
     private String address;
     private String city;
     private String zipcode;
-    private String dates;
+    private List<Date> dates;
     private String descriptionShort;
     private String description;
     private String hours;
     private String imageUrl;
     private String keywords;
     private List<Float> geolocation = new ArrayList<>();
+
 
     public Event() {
     }
@@ -58,7 +62,14 @@ public class Event implements Parcelable {
 
     @PropertyName("type_d_animation")
     public void setType(String type) {
-        this.type = type;
+        if(type != null){
+            String[] res = type.split("\\]");
+            if(res.length > 1){
+                this.type = res[1];
+            }else{
+                this.type = "";
+            }
+        }
     }
 
     @PropertyName("thematiques")
@@ -112,13 +123,23 @@ public class Event implements Parcelable {
     }
 
     @PropertyName("dates")
-    public String getDates() {
+
+    public List<Date> getDates() {
         return dates;
     }
 
     @PropertyName("dates")
     public void setDates(String dates) {
-        this.dates = dates;
+        String[] arr = dates.split(";");
+        List<Date> list = new ArrayList<>();
+        for (String date : arr) {
+            try {
+                list.add(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        this.dates = list;
     }
 
     @PropertyName("description_fr")
@@ -216,7 +237,7 @@ public class Event implements Parcelable {
         address = in.readString();
         city = in.readString();
         zipcode = in.readString();
-        dates = in.readString();
+        in.readList(dates,null);
         descriptionShort = in.readString();
         description = in.readString();
         hours= in.readString();
@@ -248,7 +269,7 @@ public class Event implements Parcelable {
         dest.writeString(address);
         dest.writeString(city);
         dest.writeString(zipcode);
-        dest.writeString(dates);
+        dest.writeList(dates);
         dest.writeString(descriptionShort);
         dest.writeString(description);
         dest.writeString(hours);
