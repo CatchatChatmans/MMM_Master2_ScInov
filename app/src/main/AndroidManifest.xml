@@ -24,6 +24,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -37,7 +39,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".eventdetail.EventDetailActivity"/>
+        <activity android:name=".eventdetail.EventDetailActivity" />
     </application>
 
 </manifest>
