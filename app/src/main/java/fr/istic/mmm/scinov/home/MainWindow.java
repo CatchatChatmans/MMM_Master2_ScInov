@@ -1,103 +1,67 @@
 package fr.istic.mmm.scinov.home;
 
-import android.app.SearchManager;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.WindowManager;
-import android.widget.SearchView;
-
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
+import fr.istic.mmm.scinov.fragment.ListFragment;
 
 public class MainWindow extends AppCompatActivity {
-    private RecyclerView recyclerView;
 
-    private List<Event> events = new ArrayList<>();
-    final MyAdapter adapter = new MyAdapter();
-    private EventViewModel viewModel;
-    LiveData<List<Event>> liveData;
+    private DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.main_layout);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        ListFragment listFragment = new ListFragment();
 
-        viewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.content_frame, listFragment)
+                .commit();
 
-        liveData = viewModel.getEventsLiveData();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        drawerLayout.closeDrawers();
 
-        liveData.observe(this, new Observer<List<Event>>() {
-            @Override
-            public void onChanged(@Nullable List<Event> eventsData) {
-                if (eventsData != null) {
-                    events = eventsData;
-                    adapter.setList(events);
-                }
-            }
-        });
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
 
+                        return true;
+                    }
+                });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                viewModel.queryData(query);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return false;
-            }
-
-
-        });
-
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                viewModel.resetQuery();
-                Log.i("SEARCHED CLOSED", "1");
-                return false;
-            }
-        });
-
-        return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-
-
 }
