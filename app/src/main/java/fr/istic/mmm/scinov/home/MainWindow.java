@@ -1,5 +1,6 @@
 package fr.istic.mmm.scinov.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -9,9 +10,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.fragment.ListFragment;
+import fr.istic.mmm.scinov.signin.SignIn;
 
 public class MainWindow extends AppCompatActivity {
 
@@ -53,6 +57,17 @@ public class MainWindow extends AppCompatActivity {
                         return true;
                     }
                 });
+
+        View header = navigationView.getHeaderView(0);
+        TextView signInBtn = header.findViewById(R.id.signin);
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SignIn.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

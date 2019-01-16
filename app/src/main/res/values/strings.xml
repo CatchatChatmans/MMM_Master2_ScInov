@@ -10,4 +10,6 @@
     <string name="nav_journey">Parcours</string>
     <string name="nav_map">Carte du festival</string>
     <string name="nav_settings">Paramètres</string>
+    <string name="sign_in_page_title">Sign in</string>
+    <string name="sign_up_page_title">Sign up</string>
 </resources>
