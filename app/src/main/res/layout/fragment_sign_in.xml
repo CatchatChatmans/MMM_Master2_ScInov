@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/sign_up_field_email"
+        android:id="@+id/sign_in_field_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/sign_up_field_password"
+        android:id="@+id/sign_in_field_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -46,10 +46,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_field_email" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_field_email" />
 
     <Button
-        android:id="@+id/sign_up_btn_sign_up"
+        android:id="@+id/sign_in_btn_sign_in"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -58,7 +58,7 @@
         android:text="@string/sign_in_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_field_password" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_field_password" />
 
     <TextView
         android:id="@+id/textView2"
@@ -66,7 +66,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/forgot_password"
-        app:layout_constraintStart_toStartOf="@+id/sign_up_btn_sign_up"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn_sign_up" />
+        app:layout_constraintStart_toStartOf="@+id/sign_in_btn_sign_in"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn_sign_in" />
+
+    <ProgressBar
+        android:id="@+id/sign_in_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
