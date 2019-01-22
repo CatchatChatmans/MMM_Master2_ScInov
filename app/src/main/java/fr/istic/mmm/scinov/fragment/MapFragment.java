@@ -52,20 +52,31 @@ public class MapFragment extends Fragment {
 
                 googleMap.setMyLocationEnabled(false);
 
-                Event event = (Event)getArguments().get("Event");
-                Log.i("GeoLoc", "[ " + event.getGeolocation().get(0) + " , " + event.getGeolocation().get(1) +" ] ");
 
-                // For dropping a marker at a point on the Map
-                LatLng eventLocation = new LatLng(event.getGeolocation().get(0), event.getGeolocation().get(1));
-                googleMap.addMarker(new MarkerOptions().position(eventLocation).title("Marker Title").snippet("Marker Description"));
-
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(eventLocation).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                if(getArguments() != null) {
+                    Event event = (Event)getArguments().get("Event");
+                    buildMapForDetail(event);
+                } else {
+                    LatLng eventLocation = new LatLng(48.11198, -1.67429);
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(eventLocation).zoom(12).build();
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                }
             }
         });
 
         return rootView;
+    }
+
+    private void buildMapForDetail(Event event) {
+        Log.i("GeoLoc", "[ " + event.getGeolocation().get(0) + " , " + event.getGeolocation().get(1) + " ] ");
+
+        // For dropping a marker at a point on the Map
+        LatLng eventLocation = new LatLng(event.getGeolocation().get(0), event.getGeolocation().get(1));
+        googleMap.addMarker(new MarkerOptions().position(eventLocation).title("Marker Title").snippet("Marker Description"));
+
+        // For zooming automatically to the location of the marker
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(eventLocation).zoom(12).build();
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     @Override

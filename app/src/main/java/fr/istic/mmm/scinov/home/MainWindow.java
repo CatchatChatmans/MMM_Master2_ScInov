@@ -53,6 +53,13 @@ public class MainWindow extends AppCompatActivity {
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
+                        switch(menuItem.getItemId()) {
+                            case R.id.nav_map:
+                            {
+                                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                                getApplicationContext().startActivity(intent);
+                            }
+                        }
 
                         return true;
                     }
