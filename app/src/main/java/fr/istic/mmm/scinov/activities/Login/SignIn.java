@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.signin;
+package fr.istic.mmm.scinov.activities.Login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.fragment.SignInFragment;
-import fr.istic.mmm.scinov.fragment.SignUpFragment;
 
 public class SignIn extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.home;
+package fr.istic.mmm.scinov.activities.Home;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,11 +11,11 @@ import java.util.List;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.model.Event;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
     List<Event> list;
 
-    public MyAdapter() {
+    public EventsListAdapter() {
         this.list = new ArrayList<>();
     }
 
@@ -25,15 +25,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
+    public EventViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_card,viewGroup,false);
-        return new MyViewHolder(view);
+        return new EventViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
+    public void onBindViewHolder(EventViewHolder eventViewHolder, int position) {
         Event event = list.get(position);
-        myViewHolder.bind(event);
+        eventViewHolder.bind(event);
     }
 
     @Override

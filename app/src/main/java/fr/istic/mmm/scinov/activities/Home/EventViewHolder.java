@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.home;
+package fr.istic.mmm.scinov.activities.Home;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -12,17 +12,17 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.eventdetail.EventDetailActivity;
+import fr.istic.mmm.scinov.activities.EventDetail.EventDetailActivity;
 import fr.istic.mmm.scinov.model.Event;
 
-public class MyViewHolder extends RecyclerView.ViewHolder{
+public class EventViewHolder extends RecyclerView.ViewHolder{
 
     private TextView textViewView;
     private TextView secondaryTextView;
     private ImageView imageView;
     private Event event;
 
-    public MyViewHolder(View itemView) {
+    public EventViewHolder(View itemView) {
         super(itemView);
         textViewView = itemView.findViewById(R.id.eventName);
         imageView = itemView.findViewById(R.id.eventImage);

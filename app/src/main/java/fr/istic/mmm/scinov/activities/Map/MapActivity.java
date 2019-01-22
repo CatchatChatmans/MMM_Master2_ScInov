@@ -1,12 +1,11 @@
-package fr.istic.mmm.scinov.home;
+package fr.istic.mmm.scinov.activities.Map;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.fragment.DetailFragment;
-import fr.istic.mmm.scinov.fragment.MapFragment;
+import fr.istic.mmm.scinov.activities.EventDetail.MapFragment;
 
 public class MapActivity extends AppCompatActivity {
 

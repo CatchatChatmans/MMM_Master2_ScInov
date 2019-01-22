@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.fragment;
+package fr.istic.mmm.scinov.activities.EventDetail;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

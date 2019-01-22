@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.home;
+package fr.istic.mmm.scinov.activities.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.fragment.EventsFragment;
-import fr.istic.mmm.scinov.signin.SignIn;
+import fr.istic.mmm.scinov.activities.Login.SignIn;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

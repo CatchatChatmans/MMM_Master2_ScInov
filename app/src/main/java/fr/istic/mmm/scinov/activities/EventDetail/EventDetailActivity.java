@@ -1,12 +1,10 @@
-package fr.istic.mmm.scinov.eventdetail;
+package fr.istic.mmm.scinov.activities.EventDetail;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.fragment.DetailFragment;
-import fr.istic.mmm.scinov.fragment.MapFragment;
 
 public class EventDetailActivity extends AppCompatActivity  {
 

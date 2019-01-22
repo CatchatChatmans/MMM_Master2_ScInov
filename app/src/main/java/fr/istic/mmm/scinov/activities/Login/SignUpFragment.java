@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.fragment;
+package fr.istic.mmm.scinov.activities.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.home.MainActivity;
+import fr.istic.mmm.scinov.activities.Home.MainActivity;
 
 public class SignUpFragment extends Fragment {
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".eventdetail.EventDetailActivity">
+    tools:context=".activities.EventDetail.EventDetailActivity">
 
     <FrameLayout
         android:id="@+id/detailFrame"

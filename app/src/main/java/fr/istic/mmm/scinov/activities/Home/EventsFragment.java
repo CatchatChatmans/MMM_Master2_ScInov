@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.fragment;
+package fr.istic.mmm.scinov.activities.Home;
 
 import android.app.SearchManager;
 import android.arch.lifecycle.LiveData;
@@ -23,14 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.home.MyAdapter;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class EventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Event> events = new ArrayList<>();
-    final MyAdapter adapter = new MyAdapter();
+    final EventsListAdapter adapter = new EventsListAdapter();
     private EventViewModel viewModel;
     LiveData<List<Event>> liveData;
 
