@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventViewModel extends ViewModel {
-    private static final DatabaseReference EVENT_REF =
-            FirebaseDatabase.getInstance().getReference("/events");
+    private static final Query EVENT_REF =
+            FirebaseDatabase.getInstance().getReference("/events").orderByKey().limitToFirst(10);
 
     private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(EVENT_REF);
 
