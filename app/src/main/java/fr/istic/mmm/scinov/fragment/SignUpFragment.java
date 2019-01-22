@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.home.MainWindow;
+import fr.istic.mmm.scinov.home.MainActivity;
 
 public class SignUpFragment extends Fragment {
 
@@ -99,7 +99,7 @@ public class SignUpFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             getActivity().finish();
-                            Intent intent = new Intent(getActivity(),MainWindow.class);
+                            Intent intent = new Intent(getActivity(),MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else {

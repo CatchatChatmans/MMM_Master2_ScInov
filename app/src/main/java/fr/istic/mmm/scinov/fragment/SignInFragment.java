@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.home.MainWindow;
+import fr.istic.mmm.scinov.home.MainActivity;
 
 public class SignInFragment extends Fragment {
 
@@ -96,7 +96,7 @@ public class SignInFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             getActivity().finish();
-                            Intent intent = new Intent(getActivity(),MainWindow.class);
+                            Intent intent = new Intent(getActivity(),MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
 

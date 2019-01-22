@@ -27,14 +27,14 @@ import fr.istic.mmm.scinov.home.MyAdapter;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
-public class ListFragment extends Fragment {
+public class EventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Event> events = new ArrayList<>();
     final MyAdapter adapter = new MyAdapter();
     private EventViewModel viewModel;
     LiveData<List<Event>> liveData;
 
-    public ListFragment() {
+    public EventsFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +44,7 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_home, container, false);
+        return inflater.inflate(R.layout.fragment_events, container, false);
     }
 
     @Override

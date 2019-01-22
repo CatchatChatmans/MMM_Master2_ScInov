@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_list"
+            android:id="@+id/nav_events"
             android:icon="@android:drawable/btn_star"
             android:title="@string/nav_list" />
         <item

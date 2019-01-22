@@ -1,12 +1,8 @@
 package fr.istic.mmm.scinov.eventdetail;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.fragment.DetailFragment;
