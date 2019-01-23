@@ -1,5 +1,6 @@
 package fr.istic.mmm.scinov.activities.Home;
 
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -11,19 +12,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.helpers.MyUtil;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
@@ -76,6 +77,7 @@ public class EventsFragment extends Fragment {
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -86,25 +88,28 @@ public class EventsFragment extends Fragment {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
+        MyUtil.clickOutsideToUnfocusSearch(getActivity().findViewById(R.id.activity_drawer),searchView);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                viewModel.queryData(query);
+                adapter.filter(query);
+                searchView.clearFocus();
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
+            public boolean onQueryTextChange(String query) {
+                adapter.filter(query);
+                return true;
             }
         });
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                viewModel.resetQuery();
-                Log.i("SEARCHED CLOSED", "1");
-                return false;
+                adapter.filter("");
+                return true;
             }
         });
     }
