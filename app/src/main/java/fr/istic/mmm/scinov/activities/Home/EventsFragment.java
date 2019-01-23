@@ -126,7 +126,12 @@ public class EventsFragment extends Fragment {
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                adapter.filter("");
+                if(searchView.getQuery().length() > 0){
+                    adapter.filter("");
+                }else{
+                    searchView.clearFocus();
+                    searchView.onActionViewCollapsed();
+                }
                 return true;
             }
         });

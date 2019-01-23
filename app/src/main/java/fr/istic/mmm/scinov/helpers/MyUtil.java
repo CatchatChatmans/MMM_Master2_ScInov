@@ -1,7 +1,6 @@
 package fr.istic.mmm.scinov.helpers;
 
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,9 @@ public class MyUtil {
                 public boolean onTouch(View v, MotionEvent event) {
                     if (searchView.hasFocus()) {
                         searchView.clearFocus();
+                        if(searchView.getQuery().length() == 0){
+                            searchView.onActionViewCollapsed();
+                        }
                     }
                     return false;
                 }
