@@ -1,6 +1,6 @@
 package fr.istic.mmm.scinov.activities.Home;
 
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,9 +30,9 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Intent viewDetail = new Intent(v.getContext(), EventDetailActivity.class);
-                viewDetail.putExtra("Event", event);
-                v.getContext().startActivity(viewDetail);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                EventDetailActivity eventDetailActivity = EventDetailActivity.newInstance(event);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailActivity).addToBackStack(null).commit();
             }
         });
     }

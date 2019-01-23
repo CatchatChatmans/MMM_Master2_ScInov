@@ -16,7 +16,7 @@ import fr.istic.mmm.scinov.model.Event;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment{
 
     private Event event;
     private TextView eventName;
