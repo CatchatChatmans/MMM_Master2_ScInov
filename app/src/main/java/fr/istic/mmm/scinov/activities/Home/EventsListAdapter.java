@@ -1,6 +1,7 @@
 package fr.istic.mmm.scinov.activities.Home;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
