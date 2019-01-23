@@ -43,10 +43,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity android:name=".activities.EventDetail.EventDetailFragment" />
-        <activity android:name=".activities.Login.LoginFragment" />
-        <activity android:name=".activities.Map.FullMapFragment"></activity>
     </application>
 
 </manifest>
