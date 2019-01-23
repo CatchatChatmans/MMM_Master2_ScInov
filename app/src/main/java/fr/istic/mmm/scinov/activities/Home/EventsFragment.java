@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
@@ -59,10 +60,15 @@ public class EventsFragment extends Fragment {
 
         liveData = viewModel.getEventsLiveData();
 
+        final ProgressBar progressBar = view.findViewById(R.id.events_progress_bar);
+
+        progressBar.setVisibility(View.VISIBLE);
+
         liveData.observe(this, new Observer<List<Event>>() {
             @Override
             public void onChanged(@Nullable List<Event> eventsData) {
                 if (eventsData != null) {
+                    progressBar.setVisibility(View.GONE);
                     events = eventsData;
                     adapter.setList(events);
                 }
