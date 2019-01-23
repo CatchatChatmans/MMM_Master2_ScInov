@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Home.EventsFragment;
 import fr.istic.mmm.scinov.activities.Map.EventsCluster;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
@@ -98,6 +99,13 @@ public class MapNestedFragment extends Fragment {
             EventDetailFragment eventDetailFragment = EventDetailFragment.newInstance(eventsCluster.getEvent());
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailFragment).addToBackStack(null).commit();
 
+        });
+
+        mClusterManager.setOnClusterClickListener( cluster -> {
+            if(googleMap.getCameraPosition().zoom < 12) return false;
+            EventsFragment eventsFragment = EventsFragment.newInstance(cluster.getItems().iterator().next().getPosition());
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventsFragment).addToBackStack(null).commit();
+            return true;
         });
 
         // Point the map's listeners at the listeners implemented by the cluster

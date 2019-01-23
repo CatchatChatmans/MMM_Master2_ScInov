@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,14 @@ public class EventsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static EventsFragment newInstance(LatLng latlng) {
+        EventsFragment eventFragment = new EventsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("SearchLatLng", latlng);
+        eventFragment.setArguments(args);
+        return eventFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +60,7 @@ public class EventsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         recyclerView = view.findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -58,7 +69,14 @@ public class EventsFragment extends Fragment {
         //get the view model from the main activity to avoid reloading the data
         viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
 
-        liveData = viewModel.getEventsLiveData();
+
+
+
+        if(getArguments() != null) {
+            liveData = viewModel.getEventsLiveDataFiltered(getArguments().getParcelable("SearchLatLng") );
+        } else {
+            liveData = viewModel.getEventsLiveData();
+        }
 
         final ProgressBar progressBar = view.findViewById(R.id.events_progress_bar);
 
