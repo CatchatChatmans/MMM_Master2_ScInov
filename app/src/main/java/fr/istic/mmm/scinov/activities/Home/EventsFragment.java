@@ -38,7 +38,6 @@ public class EventsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,7 +55,8 @@ public class EventsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        //get the view model from the main activity to avoid reloading the data
+        viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
 
         liveData = viewModel.getEventsLiveData();
 

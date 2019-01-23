@@ -1,5 +1,7 @@
 package fr.istic.mmm.scinov.activities.Home;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,14 +15,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import java.util.List;
+
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.activities.Map.FullMapFragment;
+import fr.istic.mmm.scinov.model.Event;
+import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+
+    private EventViewModel viewModel;
+    LiveData<List<Event>> liveData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
+
+        // Get the same viewModel for all the fragments
+        viewModel = ViewModelProviders.of(this).get(EventViewModel.class);
     }
 
     @Override
