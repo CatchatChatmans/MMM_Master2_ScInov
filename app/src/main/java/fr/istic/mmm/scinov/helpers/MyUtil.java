@@ -12,9 +12,7 @@ public class MyUtil {
         if(!(view instanceof SearchView)) {
             view.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
-                    Log.i("FUCK", "touched " + v.toString());
                     if (searchView.hasFocus()) {
-                        Log.i("FUCK", "unfocus");
                         searchView.clearFocus();
                     }
                     return false;
