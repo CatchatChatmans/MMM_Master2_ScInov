@@ -19,7 +19,7 @@ import java.util.List;
 
 public class EventViewModel extends ViewModel {
     private static final Query EVENT_REF =
-            FirebaseDatabase.getInstance().getReference("/events").orderByKey().limitToFirst(10);
+            FirebaseDatabase.getInstance().getReference("/events");
 
     private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(EVENT_REF);
 
@@ -39,9 +39,9 @@ public class EventViewModel extends ViewModel {
                         public void run() {
                             List<Event> events = new LinkedList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                events.add(child.child("fields").getValue(Event.class));
+                                events.add(child.getValue(Event.class));
                             }
-                            Log.i("YOLO EVENTS", Long.toString(events.size()));
+                            Log.i("YOLO EVENTS 0", Long.toString(events.size()));
                             eventsLiveData.postValue(events);
                         }
                     }).start();
@@ -50,17 +50,6 @@ public class EventViewModel extends ViewModel {
                 }
             }
         });
-    }
-
-    private class Deserializer implements Function<DataSnapshot, List<Event>> {
-        @Override
-        public List<Event> apply(DataSnapshot input) {
-            List<Event> events = new LinkedList<>();
-            for (DataSnapshot child : input.getChildren()) {
-                events.add(child.getValue(Event.class));
-            }
-            return events;
-        }
     }
 
     @NonNull
@@ -86,14 +75,14 @@ public class EventViewModel extends ViewModel {
                         public void run() {
                             List<Event> events = new LinkedList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                events.add(child.child("fields").getValue(Event.class));
+                                events.add(child.getValue(Event.class));
                             }
-                            Log.i("YOLO EVENTS", Long.toString(events.size()));
+                            Log.i("YOLO EVENTS 1", Long.toString(events.size()));
                             eventsLiveData.postValue(events);
                         }
                     }).start();
                 } else {
-                    Log.i("YOLO EVENTS", "NULL");
+                    Log.i("YOLO EVENTS 1", "NULL");
                     eventsLiveData.setValue(null);
                 }
             }
@@ -113,11 +102,11 @@ public class EventViewModel extends ViewModel {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                List<Event> events = new ArrayList<>();
+                                List<Event> events = new LinkedList<>();
                                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                    events.add(child.child("fields").getValue(Event.class));
+                                    events.add(child.getValue(Event.class));
                                 }
-                                Log.i("YOLO EVENTS", Long.toString(events.size()));
+                                Log.i("YOLO EVENTS 2", Long.toString(events.size()));
                                 eventsLiveData.postValue(events);
                             }
                         }).start();
