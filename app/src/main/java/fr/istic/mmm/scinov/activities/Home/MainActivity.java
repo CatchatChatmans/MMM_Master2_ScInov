@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Login.SignIn;
+import fr.istic.mmm.scinov.activities.Map.FullMapFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Set the toolbar as the action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Science Fest");
+        setTitle(R.string.nav_list);
 
         // Set the drawer
         drawer = findViewById(R.id.activity_drawer);
@@ -66,10 +67,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
 
             case R.id.nav_events:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).addToBackStack(null).commit();
+                setTitle(R.string.nav_list);
                 break;
             case R.id.nav_journey:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).addToBackStack(null).commit();
+                setTitle(R.string.nav_journey);
+                break;
+            case R.id.nav_map:
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new FullMapFragment()).addToBackStack(null).commit();
+                setTitle(R.string.nav_map);
                 break;
         }
 

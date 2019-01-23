@@ -46,7 +46,7 @@
 
         <activity android:name=".activities.EventDetail.EventDetailFragment" />
         <activity android:name=".activities.Login.SignIn" />
-        <activity android:name=".activities.Map.MapActivity"></activity>
+        <activity android:name=".activities.Map.FullMapFragment"></activity>
     </application>
 
 </manifest>

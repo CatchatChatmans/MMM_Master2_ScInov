@@ -39,7 +39,7 @@ public class EventDetailFragment extends Fragment {
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction()
         .replace(R.id.detailFrame, detailNestedFragment)
-        .replace(R.id.mapFrame, mapNestedFragment)
+        .replace(R.id.mainMapFrame, mapNestedFragment)
         .addToBackStack(null)
         .commit();
 
