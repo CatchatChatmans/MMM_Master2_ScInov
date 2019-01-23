@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
@@ -16,7 +17,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     List<Event> list;
 
     public EventsListAdapter() {
-        this.list = new ArrayList<>();
+        this.list = new LinkedList<>();
     }
 
     public void setList(List<Event> list) {

@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class EventViewModel extends ViewModel {
@@ -36,7 +37,7 @@ public class EventViewModel extends ViewModel {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            List<Event> events = new ArrayList<>();
+                            List<Event> events = new LinkedList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 events.add(child.child("fields").getValue(Event.class));
                             }
@@ -54,7 +55,7 @@ public class EventViewModel extends ViewModel {
     private class Deserializer implements Function<DataSnapshot, List<Event>> {
         @Override
         public List<Event> apply(DataSnapshot input) {
-            List<Event> events = new ArrayList<>();
+            List<Event> events = new LinkedList<>();
             for (DataSnapshot child : input.getChildren()) {
                 events.add(child.getValue(Event.class));
             }
@@ -83,7 +84,7 @@ public class EventViewModel extends ViewModel {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            List<Event> events = new ArrayList<>();
+                            List<Event> events = new LinkedList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 events.add(child.child("fields").getValue(Event.class));
                             }
