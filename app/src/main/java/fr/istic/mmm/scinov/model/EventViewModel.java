@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -16,6 +17,7 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventViewModel extends ViewModel {
     private static final Query EVENT_REF =
@@ -119,4 +121,15 @@ public class EventViewModel extends ViewModel {
             isQueryActivated = false;
         }
     }
+
+
+    public LiveData<List<Event>> getEventsLiveDataFiltered(LatLng latLng) {
+
+        List<Event> filteredList = eventsLiveData.getValue().stream().filter(event -> !event.getGeolocation().isEmpty() &&  Double.compare(event.getGeolocation().get(0), latLng.latitude) == 0
+                && Double.compare(event.getGeolocation().get(1), latLng.longitude) == 0 ).collect(Collectors.toList());
+        MediatorLiveData<List<Event>> fakeLiveData = new MediatorLiveData<>();
+        fakeLiveData.setValue(filteredList);
+        return fakeLiveData;
+    }
+
 }

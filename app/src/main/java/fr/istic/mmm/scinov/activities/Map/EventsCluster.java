@@ -3,21 +3,23 @@ package fr.istic.mmm.scinov.activities.Map;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
+import fr.istic.mmm.scinov.model.Event;
+
 public class EventsCluster implements ClusterItem {
     private final LatLng mPosition;
     private final String mTitle;
     private final String mSnippet;
+    private final Event event;
 
-    public EventsCluster(double lat, double lng) {
-        mPosition = new LatLng(lat, lng);
-        mSnippet = null;
-        mTitle = null;
+    public EventsCluster(double lat, double lng, String title, String snippet, Event event) {
+        this.event = event;
+        this.mPosition = new LatLng(lat, lng);
+        this.mTitle = title;
+        this.mSnippet = snippet;
     }
 
-    public EventsCluster(double lat, double lng, String title, String snippet) {
-        mPosition = new LatLng(lat, lng);
-        mTitle = title;
-        mSnippet = snippet;
+    public Event getEvent() {
+        return event;
     }
 
     @Override
