@@ -18,51 +18,48 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
 
-public class SignUpFragment extends Fragment {
+public class SignInNestedFragment extends Fragment {
 
     private EditText emailField;
     private EditText passwordField;
-    private Button signUpBtn;
+    private Button signInBtn;
     private ProgressBar progressBar;
 
     private FirebaseAuth auth;
 
-    public SignUpFragment() {
+    public SignInNestedFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         auth = FirebaseAuth.getInstance();
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false);
+        return inflater.inflate(R.layout.fragment_sign_in, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        emailField = view.findViewById(R.id.sign_up_field_email);
-        passwordField = view.findViewById(R.id.sign_up_field_password);
-        signUpBtn = view.findViewById(R.id.sign_up_btn_sign_up);
-        progressBar = view.findViewById(R.id.sign_up_progress_bar);
+        emailField = view.findViewById(R.id.sign_in_field_email);
+        passwordField = view.findViewById(R.id.sign_in_field_password);
+        signInBtn = view.findViewById(R.id.sign_in_btn_sign_in);
+        progressBar = view.findViewById(R.id.sign_in_progress_bar);
 
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
+        signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
+                signInUser();
             }
         });
     }
 
-    private void registerUser(){
+    private void signInUser(){
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
 
@@ -92,8 +89,8 @@ public class SignUpFragment extends Fragment {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(email,password).
+                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
@@ -102,17 +99,11 @@ public class SignUpFragment extends Fragment {
                             Intent intent = new Intent(getActivity(),MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
-                        } else {
 
-                            if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                Toast.makeText(getActivity(),"This email is already registered",Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(getActivity(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            }
+                        } else {
+                            Toast.makeText(getActivity(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-
     }
 }

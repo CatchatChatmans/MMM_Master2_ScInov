@@ -1,6 +1,5 @@
 package fr.istic.mmm.scinov.activities.Home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,8 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.Login.SignIn;
+import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.activities.Map.FullMapFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SignIn.class);
-                v.getContext().startActivity(intent);
-                drawer.closeDrawers();
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new LoginFragment()).addToBackStack(null).commit();
+                setTitle(R.string.nav_login);
+                drawer.closeDrawer(GravityCompat.START);
             }
         });
     }

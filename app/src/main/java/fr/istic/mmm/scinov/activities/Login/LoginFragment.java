@@ -1,35 +1,45 @@
 package fr.istic.mmm.scinov.activities.Login;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import fr.istic.mmm.scinov.R;
 
-public class SignIn extends AppCompatActivity {
+public class LoginFragment extends Fragment {
 
     private static final int NUM_ITEMS = 2;
     private FragmentPagerAdapter adapter;
     private ViewPager pager;
 
+    public LoginFragment() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_sign_in, container, false);
+    }
 
-        adapter = new FixedTabsPagerAdapter(getSupportFragmentManager());
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        pager = findViewById(R.id.pager);
+        adapter = new FixedTabsPagerAdapter(getChildFragmentManager());
+
+        pager = view.findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(pager);
-
     }
 
 
@@ -48,9 +58,9 @@ public class SignIn extends AppCompatActivity {
         public Fragment getItem(int i) {
             switch(i){
                 case 0:
-                    return new SignInFragment();
+                    return new SignInNestedFragment();
                 case 1:
-                    return new SignUpFragment();
+                    return new SignUpNestedFragment();
                 default:
                     return null;
             }
