@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "fr.istic.mmm.scinov"
-        minSdkVersion 17
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -16,12 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
+    }
 }
 
 dependencies {
-
-    implementation 'com.google.maps.android:android-maps-utils:0.5+'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
@@ -34,7 +39,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-database:16.0.5'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
 }

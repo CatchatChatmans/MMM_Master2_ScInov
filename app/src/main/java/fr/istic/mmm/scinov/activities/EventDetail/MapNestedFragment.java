@@ -2,6 +2,7 @@ package fr.istic.mmm.scinov.activities.EventDetail;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -21,9 +22,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
 
+import java.util.List;
+import java.util.Objects;
+
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Map.EventsCluster;
 import fr.istic.mmm.scinov.model.Event;
+import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class MapNestedFragment extends Fragment {
 
@@ -31,11 +36,13 @@ public class MapNestedFragment extends Fragment {
     private GoogleMap googleMap;
     // Declare a variable for the cluster manager.
     private ClusterManager<EventsCluster> mClusterManager;
+    private EventViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
+        viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
 
@@ -86,16 +93,13 @@ public class MapNestedFragment extends Fragment {
     }
 
     private void buildFullMap() {
-        setUpClusterer();
-//        LatLng eventLocation = new LatLng(48.11198, -1.67429);
-//        CameraPosition cameraPosition = new CameraPosition.Builder().target(eventLocation).zoom(12).build();
-//        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        setUpCluster();
     }
 
-    private void setUpClusterer() {
-        LatLng eventLocation = new LatLng(48.11198, -1.67429);
+    private void setUpCluster() {
+        LatLng eventLocation = new LatLng(45.77966, 3.08628);
         // Position the map.
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 10));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 6));
 
         // Initialize the manager with the context and the map.
         // (Activity extends context, so we can pass 'this' in the constructor.)
@@ -111,19 +115,14 @@ public class MapNestedFragment extends Fragment {
     }
 
     private void addItems() {
-
-        // Set some lat/lng coordinates to start with.
-        double lat = 48.11198;
-        double lng = -1.67429;
-
-        // Add ten cluster items in close proximity, for purposes of this example.
-        for (int i = 0; i < 10; i++) {
-            double offset = i / 60d;
-            lat = lat + offset;
-            lng = lng + offset;
-            EventsCluster offsetItem = new EventsCluster(lat, lng);
-            mClusterManager.addItem(offsetItem);
-        }
+        List<Event> list = viewModel.getEventsLiveData().getValue();
+        Objects.requireNonNull(list);
+        list.forEach(event -> {
+            if(event.getGeolocation() != null && !event.getGeolocation().isEmpty()) {
+                EventsCluster offsetItem = new EventsCluster(event.getGeolocation().get(0), event.getGeolocation().get(1), event.getName(), event.getDescriptionShort());
+                mClusterManager.addItem(offsetItem);
+            }
+        });
     }
 
     @Override
