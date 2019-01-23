@@ -10,17 +10,17 @@ import android.view.ViewGroup;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.model.Event;
 
-public class EventDetailActivity extends Fragment {
+public class EventDetailFragment extends Fragment {
 
-    public EventDetailActivity() {
+    public EventDetailFragment() {
     }
 
-    public static EventDetailActivity newInstance(Event event) {
-        EventDetailActivity eventDetailActivity = new EventDetailActivity();
+    public static EventDetailFragment newInstance(Event event) {
+        EventDetailFragment eventDetailFragment = new EventDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable("Event", event);
-        eventDetailActivity.setArguments(args);
-        return eventDetailActivity;
+        eventDetailFragment.setArguments(args);
+        return eventDetailFragment;
     }
 
     @Override
@@ -30,16 +30,16 @@ public class EventDetailActivity extends Fragment {
         Bundle args = new Bundle();
         args.putParcelable("Event", getArguments().getParcelable("Event"));
 
-        DetailFragment detailFragment = new DetailFragment();
-        detailFragment.setArguments(args);
+        DetailNestedFragment detailNestedFragment = new DetailNestedFragment();
+        detailNestedFragment.setArguments(args);
 
-        MapFragment mapFragment = new MapFragment();
-        mapFragment.setArguments(args);
+        MapNestedFragment mapNestedFragment = new MapNestedFragment();
+        mapNestedFragment.setArguments(args);
 
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction()
-        .replace(R.id.detailFrame, detailFragment)
-        .replace(R.id.mapFrame, mapFragment)
+        .replace(R.id.detailFrame, detailNestedFragment)
+        .replace(R.id.mapFrame, mapNestedFragment)
         .addToBackStack(null)
         .commit();
 
@@ -52,10 +52,10 @@ public class EventDetailActivity extends Fragment {
 //        super.onCreate(savedInstanceState);
 //
 //
-////            DetailFragment detailFragment = new DetailFragment();
+////            DetailNestedFragment detailFragment = new DetailNestedFragment();
 ////            detailFragment.setArguments(getIntent().getExtras());
 ////
-////            MapFragment mapFragment = new MapFragment();
+////            MapNestedFragment mapFragment = new MapNestedFragment();
 ////            mapFragment.setArguments(getIntent().getExtras());
 ////
 ////            FragmentManager fragmentManager = getSupportFragmentManager();

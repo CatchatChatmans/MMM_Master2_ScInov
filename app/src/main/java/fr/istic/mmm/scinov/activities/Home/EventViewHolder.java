@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.EventDetail.EventDetailActivity;
+import fr.istic.mmm.scinov.activities.EventDetail.EventDetailFragment;
 import fr.istic.mmm.scinov.model.Event;
 
 public class EventViewHolder extends RecyclerView.ViewHolder{
@@ -31,8 +31,8 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                EventDetailActivity eventDetailActivity = EventDetailActivity.newInstance(event);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailActivity).addToBackStack(null).commit();
+                EventDetailFragment eventDetailFragment = EventDetailFragment.newInstance(event);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailFragment).addToBackStack(null).commit();
             }
         });
     }

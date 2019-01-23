@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.EventDetail.MapFragment;
+import fr.istic.mmm.scinov.activities.EventDetail.MapNestedFragment;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -20,11 +20,11 @@ public class MapActivity extends AppCompatActivity {
             }
 
 
-            MapFragment mapFragment = new MapFragment();
+            MapNestedFragment mapNestedFragment = new MapNestedFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .add(R.id.mapFrame, mapFragment)
+                    .add(R.id.mapFrame, mapNestedFragment)
                     .commit();
 
         }

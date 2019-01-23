@@ -16,13 +16,13 @@ import fr.istic.mmm.scinov.model.Event;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailFragment extends Fragment{
+public class DetailNestedFragment extends Fragment{
 
     private Event event;
     private TextView eventName;
     private TextView eventTheme;
 
-    public DetailFragment() {
+    public DetailNestedFragment() {
         // Required empty public constructor
     }
 

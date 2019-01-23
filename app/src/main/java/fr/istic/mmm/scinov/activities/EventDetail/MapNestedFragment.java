@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.model.Event;
 
-public class MapFragment extends Fragment {
+public class MapNestedFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
