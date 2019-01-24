@@ -18,36 +18,43 @@ import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 public class JourneyViewModel extends ViewModel {
     private static final DatabaseReference JOURNEY_REF =
             FirebaseDatabase.getInstance().getReference("/journeys");
-    
-    private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(JOURNEY_REF);
 
-    private final MediatorLiveData<List<Journey>> journeysLiveData = new MediatorLiveData<>();
+    private final Query queryPrivateJourneys = JOURNEY_REF;
+    private final Query queryPublicJourneys = JOURNEY_REF.orderByChild("isPublished").equalTo(true);
 
+    private FirebaseQueryLiveData liveDataPrivateJourneys = new FirebaseQueryLiveData(queryPrivateJourneys);
+    private FirebaseQueryLiveData liveDataPublicJourneys = new FirebaseQueryLiveData(queryPublicJourneys);
 
+    private final MediatorLiveData<List<Journey>> privateJourneysLiveData = new MediatorLiveData<>();
+    private final MediatorLiveData<List<Journey>> publicJourneysLiveData = new MediatorLiveData<>();
 
     public JourneyViewModel() {
-
-        loadJourneys(liveData);
-
+        loadJourneys(liveDataPrivateJourneys, privateJourneysLiveData);
+        loadJourneys(liveDataPublicJourneys, publicJourneysLiveData);
     }
 
     @NonNull
-    public LiveData<List<Journey>> getJourneysLiveData() {
-        return journeysLiveData;
+    public LiveData<List<Journey>> getPrivateJourneysLiveData() {
+        return privateJourneysLiveData;
     }
 
-    private void loadJourneys(FirebaseQueryLiveData liveData) {
-        journeysLiveData.addSource(liveData, dataSnapshot -> {
+    @NonNull
+    public LiveData<List<Journey>> getPublicJourneysLiveData() {
+        return publicJourneysLiveData;
+    }
+
+    private void loadJourneys(FirebaseQueryLiveData liveData, MediatorLiveData<List<Journey>> mediatorLiveData) {
+        mediatorLiveData.addSource(liveData, dataSnapshot -> {
             if (dataSnapshot != null) {
                 new Thread(() -> {
                     List<Journey> journeys = new LinkedList<>();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         journeys.add(child.getValue(Journey.class));
                     }
-                    journeysLiveData.postValue(journeys);
+                    mediatorLiveData.postValue(journeys);
                 }).start();
             } else {
-                journeysLiveData.setValue(null);
+                mediatorLiveData.setValue(null);
             }
         });
     }

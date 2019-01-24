@@ -61,7 +61,7 @@ public class PrivateJourneyFragment extends Fragment {
         //get the view model from the main activity to avoid reloading the data
         viewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
 
-        liveData = viewModel.getJourneysLiveData();
+        liveData = viewModel.getPrivateJourneysLiveData();
 
         final ProgressBar progressBar = view.findViewById(R.id.journeys_progress_bar);
 

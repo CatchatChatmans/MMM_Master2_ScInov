@@ -40,7 +40,7 @@ public class TestJourneys extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(JourneyViewModel.class);
 
-        liveData = viewModel.getJourneysLiveData();
+        liveData = viewModel.getPublicJourneysLiveData();
 
         journeys = new ArrayList<>();
 

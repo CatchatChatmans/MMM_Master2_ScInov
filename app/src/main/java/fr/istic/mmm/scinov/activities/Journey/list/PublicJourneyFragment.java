@@ -26,7 +26,6 @@ import java.util.List;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
-import fr.istic.mmm.scinov.activities.Journey.model.PublicJourneyViewModel;
 import fr.istic.mmm.scinov.activities.Journey.recycler.JourneyListAdapter;
 import fr.istic.mmm.scinov.helpers.MyUtil;
 
@@ -35,7 +34,7 @@ public class PublicJourneyFragment extends Fragment {
 
     private RecyclerView recyclerView;
     final JourneyListAdapter adapter = new JourneyListAdapter();
-    private PublicJourneyViewModel viewModel;
+    private JourneyViewModel viewModel;
     private String currentSearchQuery;
     LiveData<List<Journey>> liveData;
 
@@ -67,9 +66,9 @@ public class PublicJourneyFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //get the view model from the main activity to avoid reloading the data
-        viewModel = ViewModelProviders.of(getActivity()).get(PublicJourneyViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
 
-        liveData = viewModel.getJourneysLiveData();
+        liveData = viewModel.getPublicJourneysLiveData();
 
         final ProgressBar progressBar = view.findViewById(R.id.journeys_progress_bar);
 
