@@ -15,7 +15,7 @@ import java.util.List;
 
 import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 
-public class PublishedJourneyViewModel extends ViewModel {
+public class PublicJourneyViewModel extends ViewModel {
     private static final Query JOURNEY_REF =
             FirebaseDatabase.getInstance().getReference("/journeys").orderByChild("isPublished").equalTo(true);
 
@@ -27,7 +27,7 @@ public class PublishedJourneyViewModel extends ViewModel {
 
 
 
-    public PublishedJourneyViewModel() {
+    public PublicJourneyViewModel() {
 
         loadJourneys(liveData);
 

@@ -19,7 +19,7 @@ public class JourneyViewHolder extends RecyclerView.ViewHolder{
 
     public JourneyViewHolder(View itemView) {
         super(itemView);
-        journeyTitle = itemView.findViewById(R.id.journeyTitle);
+        journeyTitle = itemView.findViewById(R.id.journeyName);
         journeyAuthor = itemView.findViewById(R.id.journeyAuthor);
         published = itemView.findViewById(R.id.journeyPublished);
 

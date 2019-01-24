@@ -18,9 +18,7 @@ import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 public class JourneyViewModel extends ViewModel {
     private static final DatabaseReference JOURNEY_REF =
             FirebaseDatabase.getInstance().getReference("/journeys");
-
-    private static final Query JOURNEY_QUERY = JOURNEY_REF.orderByChild("isPublished").equalTo(true);
-
+    
     private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(JOURNEY_REF);
 
     private final MediatorLiveData<List<Journey>> journeysLiveData = new MediatorLiveData<>();
