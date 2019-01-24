@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +36,7 @@ public class EventsFragment extends Fragment {
     private List<Event> events = new ArrayList<>();
     final EventsListAdapter adapter = new EventsListAdapter();
     private EventViewModel viewModel;
+    private String currentSearchQuery;
     LiveData<List<Event>> liveData;
 
     public EventsFragment() {
@@ -53,14 +55,12 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_events, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         recyclerView = view.findViewById(R.id.recyclerView);
 
@@ -69,9 +69,6 @@ public class EventsFragment extends Fragment {
 
         //get the view model from the main activity to avoid reloading the data
         viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
-
-
-
 
         if(getArguments() != null) {
             liveData = viewModel.getEventsLiveDataFiltered(getArguments().getParcelable("SearchLatLng") );
@@ -89,7 +86,12 @@ public class EventsFragment extends Fragment {
                 if (eventsData != null) {
                     progressBar.setVisibility(View.GONE);
                     events = eventsData;
-                    adapter.setList(events);
+                    Log.i("SEARCHING","setList adapter " + events.size());
+                    Log.i("SEARCHING","current query " + currentSearchQuery);
+                    if(currentSearchQuery == null || currentSearchQuery.isEmpty()) {
+                        Log.i("SEARCHING","FIRST INIT " + currentSearchQuery);
+                        adapter.setList(events);
+                    }
                 }
             }
         });
@@ -119,6 +121,10 @@ public class EventsFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String query) {
                 adapter.filter(query);
+                if(!query.equals(currentSearchQuery)){
+                    recyclerView.smoothScrollToPosition(0);
+                }
+                currentSearchQuery = query;
                 return true;
             }
         });
@@ -135,5 +141,12 @@ public class EventsFragment extends Fragment {
                 return true;
             }
         });
+
+        if(currentSearchQuery != null && (!currentSearchQuery.isEmpty())){
+            Log.i("SEARCHING",currentSearchQuery);
+            searchView.setIconified(false);
+            searchView.setQuery(currentSearchQuery, true); // fill in the search term by default
+            searchView.clearFocus(); // close the keyboard on load
+        }
     }
 }

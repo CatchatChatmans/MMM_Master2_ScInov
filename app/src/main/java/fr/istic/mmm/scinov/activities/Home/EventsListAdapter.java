@@ -2,6 +2,7 @@ package fr.istic.mmm.scinov.activities.Home;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,11 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
     public EventsListAdapter() {
         this.list = new LinkedList<>();
+        Log.i("SEARCHING", "adapter created");
     }
 
     public void setList(List<Event> list) {
-        this.list = list;
+        this.list = new ArrayList<>(list);
         listCopy = new ArrayList<>(list);
         notifyDataSetChanged();
     }
