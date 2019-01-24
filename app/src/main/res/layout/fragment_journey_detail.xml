@@ -16,7 +16,7 @@
         android:layout_marginBottom="8dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/events"
-        app:layout_constraintEnd_toStartOf="@+id/shared"
+        app:layout_constraintEnd_toStartOf="@+id/journeyPublished"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/journeyTitle"
         app:layout_constraintTop_toBottomOf="@+id/journeyTitle"
@@ -38,7 +38,7 @@
         tools:text="Title of the journey" />
 
     <Switch
-        android:id="@+id/shared"
+        android:id="@+id/journeyPublished"
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

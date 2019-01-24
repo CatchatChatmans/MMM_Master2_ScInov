@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.model.Journey;
-import fr.istic.mmm.scinov.model.JourneyViewModel;
+import fr.istic.mmm.scinov.activities.Journey.model.Journey;
+import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
 
 public class TestJourneys extends Fragment {
 

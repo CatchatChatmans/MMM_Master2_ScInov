@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.model;
+package fr.istic.mmm.scinov.activities.Journey.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
@@ -12,6 +12,8 @@ import com.google.firebase.database.Query;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 
 public class JourneyViewModel extends ViewModel {
     private static final DatabaseReference JOURNEY_REF =

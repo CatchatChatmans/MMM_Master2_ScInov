@@ -2,7 +2,6 @@ package fr.istic.mmm.scinov.activities.Journey.recycler;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import java.util.List;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.helpers.MyUtil;
-import fr.istic.mmm.scinov.model.Journey;
+import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 
 public class JourneyListAdapter extends RecyclerView.Adapter<JourneyViewHolder> {
 
@@ -54,7 +53,7 @@ public class JourneyListAdapter extends RecyclerView.Adapter<JourneyViewHolder> 
         }else{
             query = query.toLowerCase();
             for(Journey journey: listCopy){
-                if(journey.getTitle() != null && journey.getTitle().toLowerCase().contains(query)) {
+                if(journey.getName() != null && journey.getName().toLowerCase().contains(query)) {
                     list.add(journey);
                 }
             }

@@ -1,32 +1,33 @@
 package fr.istic.mmm.scinov.activities.Journey.list;
 
+import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.Home.EventsListAdapter;
 import fr.istic.mmm.scinov.activities.Journey.recycler.JourneyListAdapter;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
-import fr.istic.mmm.scinov.model.Journey;
-import fr.istic.mmm.scinov.model.JourneyViewModel;
+import fr.istic.mmm.scinov.helpers.MyUtil;
+import fr.istic.mmm.scinov.activities.Journey.model.Journey;
+import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
 
 public class PrivateJourneyFragment extends Fragment {
 
@@ -78,5 +79,58 @@ public class PrivateJourneyFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.options_menu, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+
+        MyUtil.clickOutsideToUnfocusSearch(getActivity().findViewById(R.id.activity_drawer),searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                searchView.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                adapter.filter(query);
+                if(!query.equals(currentSearchQuery)){
+                    recyclerView.smoothScrollToPosition(0);
+                }
+                currentSearchQuery = query;
+                return true;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                if(searchView.getQuery().length() > 0){
+                    adapter.filter("");
+                }else{
+                    searchView.clearFocus();
+                    searchView.onActionViewCollapsed();
+                }
+                return true;
+            }
+        });
+
+        if(currentSearchQuery != null && (!currentSearchQuery.isEmpty())){
+            Log.i("SEARCHING",currentSearchQuery);
+            searchView.setIconified(false);
+            searchView.setQuery(currentSearchQuery, true); // fill in the search term by default
+            searchView.clearFocus(); // close the keyboard on load
+        }
     }
 }

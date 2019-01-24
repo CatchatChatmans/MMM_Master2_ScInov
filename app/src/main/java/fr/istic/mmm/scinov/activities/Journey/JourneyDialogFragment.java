@@ -26,14 +26,7 @@ public class JourneyDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment JourneyDialogFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static JourneyDialogFragment newInstance() {
+     public static JourneyDialogFragment newInstance() {
         JourneyDialogFragment fragment = new JourneyDialogFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
