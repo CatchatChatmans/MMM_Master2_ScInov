@@ -22,4 +22,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_login">Sign in</string>
+    <string name="private_journeys_pager_title">My Journeys</string>
+    <string name="shared_journeys_pager_title">Public Journeys</string>
+
 </resources>

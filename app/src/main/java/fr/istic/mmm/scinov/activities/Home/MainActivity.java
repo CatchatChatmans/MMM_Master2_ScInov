@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Journey.list.JourneyListFragment;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.activities.Map.FullMapFragment;
 import fr.istic.mmm.scinov.model.Event;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setTitle(R.string.nav_list);
                 break;
             case R.id.nav_journey:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new JourneyListFragment()).addToBackStack(null).commit();
                 setTitle(R.string.nav_journey);
                 break;
             case R.id.nav_map:

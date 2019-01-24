@@ -20,11 +20,9 @@ public class JourneyViewModel extends ViewModel {
 
     private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(JOURNEY_QUERY);
 
-    private FirebaseQueryLiveData queriedLiveData;
-
     private final MediatorLiveData<List<Journey>> journeysLiveData = new MediatorLiveData<>();
 
-    private boolean isQueryActivated = false;
+
 
     public JourneyViewModel() {
 
