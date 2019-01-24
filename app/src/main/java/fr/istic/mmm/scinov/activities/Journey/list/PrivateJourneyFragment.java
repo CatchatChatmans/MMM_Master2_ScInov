@@ -45,7 +45,7 @@ public class PrivateJourneyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_private_journey, container, false);
     }
 
@@ -63,7 +63,7 @@ public class PrivateJourneyFragment extends Fragment {
 
         liveData = viewModel.getJourneysLiveData();
 
-        final ProgressBar progressBar = view.findViewById(R.id.events_progress_bar);
+        final ProgressBar progressBar = view.findViewById(R.id.journeys_progress_bar);
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -92,7 +92,7 @@ public class PrivateJourneyFragment extends Fragment {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
-        MyUtil.clickOutsideToUnfocusSearch(getActivity().findViewById(R.id.activity_drawer),searchView);
+        MyUtil.clickOutsideToUnfocusSearch(getParentFragment().getActivity().findViewById(R.id.activity_drawer),searchView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
