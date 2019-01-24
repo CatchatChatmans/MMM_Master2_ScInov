@@ -2,10 +2,8 @@ package fr.istic.mmm.scinov.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class JourneyViewModel extends ViewModel {
     private static final Query JOURNEY_QUERY =
-            FirebaseDatabase.getInstance().getReference("/parcours");
+            FirebaseDatabase.getInstance().getReference("/journeys");
 
     private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(JOURNEY_QUERY);
 
