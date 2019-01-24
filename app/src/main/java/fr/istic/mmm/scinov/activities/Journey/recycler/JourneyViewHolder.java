@@ -14,6 +14,7 @@ public class JourneyViewHolder extends RecyclerView.ViewHolder{
 
     private TextView journeyTitle;
     private TextView journeyAuthor;
+    private TextView journeyNbEvents;
     private Switch published;
     private Journey journey;
 
@@ -21,6 +22,7 @@ public class JourneyViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         journeyTitle = itemView.findViewById(R.id.journeyName);
         journeyAuthor = itemView.findViewById(R.id.journeyAuthor);
+        journeyNbEvents = itemView.findViewById(R.id.journey_nb_events);
         published = itemView.findViewById(R.id.journeyPublished);
 
         itemView.setOnClickListener(v -> {
@@ -34,6 +36,7 @@ public class JourneyViewHolder extends RecyclerView.ViewHolder{
         this.journey = journey;
         journeyTitle.setText(journey.getName());
         journeyAuthor.setText(journey.getAuthor());
+        journeyNbEvents.setText(journey.getEvents().size() + " events");
         published.setChecked(journey.getPublished());
     }
 }
