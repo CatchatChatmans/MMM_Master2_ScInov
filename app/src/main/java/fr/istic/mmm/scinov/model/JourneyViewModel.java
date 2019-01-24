@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -13,10 +14,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class JourneyViewModel extends ViewModel {
-    private static final Query JOURNEY_QUERY =
+    private static final DatabaseReference JOURNEY_REF =
             FirebaseDatabase.getInstance().getReference("/journeys");
 
-    private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(JOURNEY_QUERY);
+    private static final Query JOURNEY_QUERY = JOURNEY_REF.orderByChild("isPublished").equalTo(true);
+
+    private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(JOURNEY_REF);
 
     private FirebaseQueryLiveData queriedLiveData;
 

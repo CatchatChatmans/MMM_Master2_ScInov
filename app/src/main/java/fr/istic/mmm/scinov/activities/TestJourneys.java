@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
@@ -40,6 +41,8 @@ public class TestJourneys extends Fragment {
         viewModel = ViewModelProviders.of(this).get(JourneyViewModel.class);
 
         liveData = viewModel.getJourneysLiveData();
+
+        journeys = new ArrayList<>();
 
         liveData.observe(this, new Observer<List<Journey>>() {
             @Override
