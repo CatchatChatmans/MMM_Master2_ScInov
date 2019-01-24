@@ -1,13 +1,13 @@
 package fr.istic.mmm.scinov.activities.Home;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,29 +17,34 @@ import fr.istic.mmm.scinov.model.Event;
 
 public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
-    List<Event> list;
-    List<Event> listCopy;
+    private List<Event> list;
+    private List<Event> listCopy;
+    private boolean hasSearchBar;
 
-    public EventsListAdapter() {
+    public EventsListAdapter(boolean hasSearchBar) {
         this.list = new LinkedList<>();
         Log.i("SEARCHING", "adapter created");
+        this.hasSearchBar = hasSearchBar;
     }
 
     public void setList(List<Event> list) {
         this.list = new LinkedList<>(list);
-        listCopy = new LinkedList<>(list);
+        this.listCopy = new LinkedList<>(list);
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public EventViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
+    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_card,viewGroup,false);
-        MyUtil.clickOutsideToUnfocusSearch(view,((Activity) viewGroup.getContext()).findViewById(R.id.search));
+        if(hasSearchBar){
+            MyUtil.clickOutsideToUnfocusSearch(view,((Activity) viewGroup.getContext()).findViewById(R.id.search));
+        }
         return new EventViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(EventViewHolder eventViewHolder, int position) {
+    public void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int position) {
         Event event = list.get(position);
         eventViewHolder.bind(event);
     }

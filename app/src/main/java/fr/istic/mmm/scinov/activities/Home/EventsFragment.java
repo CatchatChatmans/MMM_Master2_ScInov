@@ -34,7 +34,7 @@ import fr.istic.mmm.scinov.model.EventViewModel;
 public class EventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Event> events = new ArrayList<>();
-    final EventsListAdapter adapter = new EventsListAdapter();
+    final EventsListAdapter adapter = new EventsListAdapter(true);
     private EventViewModel viewModel;
     private String currentSearchQuery;
     LiveData<List<Event>> liveData;

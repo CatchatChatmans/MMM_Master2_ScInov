@@ -1,24 +1,19 @@
 package fr.istic.mmm.scinov.activities.Journey;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,21 +23,17 @@ import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
-
 public class JourneyDetailFragment extends Fragment {
 
     private TextView name;
     private TextView author;
     private Switch isPublished;
     private RecyclerView recyclerView;
-    private final EventsListAdapter adapter = new EventsListAdapter();
-
-
+    private final EventsListAdapter adapter = new EventsListAdapter(false);
 
     public JourneyDetailFragment() {
         // Required empty public constructor
     }
-
 
     public static JourneyDetailFragment newInstance(Journey journey) {
 
@@ -51,7 +42,6 @@ public class JourneyDetailFragment extends Fragment {
         args.putParcelable("Journey", journey);
         eventDetailFragment.setArguments(args);
         return eventDetailFragment;
-
     }
 
     @Override
@@ -73,10 +63,7 @@ public class JourneyDetailFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-
-
         EventViewModel eventViewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
-
 
         Bundle bundle = getArguments();
         if(bundle != null){
