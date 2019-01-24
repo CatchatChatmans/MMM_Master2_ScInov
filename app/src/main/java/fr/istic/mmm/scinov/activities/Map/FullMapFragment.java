@@ -19,11 +19,11 @@ public class FullMapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        MapNestedFragment mapNestedFragment = new MapNestedFragment();
+        ClusteredMapFragment clusteredMapFragment = new ClusteredMapFragment();
 
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.mainMapFrame, mapNestedFragment)
+                .replace(R.id.mainMapFrame, clusteredMapFragment)
                 .addToBackStack(null)
                 .commit();
 
