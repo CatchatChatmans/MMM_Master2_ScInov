@@ -5,57 +5,82 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @IgnoreExtraProperties
 public class Journey implements Parcelable {
 
-    private String id;
-    private String title;
-    private Boolean shared;
+    private String name;
+    private List<Integer> events = new ArrayList<>();
+    private Boolean isPublished;
     private String author;
+    private List<String> subcribers = new ArrayList<>();
 
     public Journey() {
     }
 
-
-    public String getId() {
-        return id;
+    @PropertyName("name")
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @PropertyName("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
+    @PropertyName("events")
+    public List<Integer> getEvents() {
+        return events;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    @PropertyName("events")
+    public void setEvents(List<Integer> events) {
+        this.events = events;
     }
 
-    public Boolean getShared() {
-        return shared;
+    @PropertyName("isPublished")
+    public Boolean getPublished() {
+        return isPublished;
     }
 
-    public void setShared(Boolean shared) {
-        this.shared = shared;
+    @PropertyName("isPublished")
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 
+    @PropertyName("author")
     public String getAuthor() {
         return author;
     }
 
+    @PropertyName("author")
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    protected Journey(Parcel in) {
-        id = in.readString();
-        title = in.readString();
-        author = in.readString();
-        shared = in.readByte() != 0;
+    @PropertyName("subscribers")
+    public List<String> getSubcribers() {
+        return subcribers;
+    }
+
+    @PropertyName("subscribers")
+    public void setSubcribers(List<String> subcribers) {
+        this.subcribers = subcribers;
+    }
+
+    @Override
+    public String toString() {
+        return "Journey{" +
+                "name='" + name + '\'' +
+                ", events=" + events +
+                ", isPublished=" + isPublished +
+                ", author='" + author + '\'' +
+                ", subcribers=" + subcribers +
+                '}';
     }
 
     @Override
@@ -63,13 +88,23 @@ public class Journey implements Parcelable {
         return 0;
     }
 
+    protected Journey(Parcel in) {
+        name = in.readString();
+        author = in.readString();
+        isPublished = in.readByte() == 0 ? false : true;
+        in.readList(events,null);
+        in.readList(subcribers,null);
+
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeString(this.id);
-        dest.writeString(this.title);
+        dest.writeString(this.name);
         dest.writeString(this.author);
-        dest.writeByte((byte) (this.shared ? 1 : 0));
+        dest.writeByte((byte) (this.isPublished ? 1 : 0));
+        dest.writeList(this.events);
+        dest.writeList(this.subcribers);
 
     }
 
@@ -84,5 +119,4 @@ public class Journey implements Parcelable {
             return new Journey[size];
         }
     };
-
 }
