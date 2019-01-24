@@ -26,8 +26,8 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     }
 
     public void setList(List<Event> list) {
-        this.list = new ArrayList<>(list);
-        listCopy = new ArrayList<>(list);
+        this.list = new LinkedList<>(list);
+        listCopy = new LinkedList<>(list);
         notifyDataSetChanged();
     }
 
