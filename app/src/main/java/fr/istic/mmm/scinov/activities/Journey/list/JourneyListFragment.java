@@ -64,7 +64,7 @@ public class JourneyListFragment extends Fragment {
                 case 0:
                     return new PrivateJourneyFragment();
                 case 1:
-                    return new SharedJourneyFragment();
+                    return new PublicJourneyFragment();
                 default:
                     return null;
             }
