@@ -4,20 +4,33 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Home.MainActivity;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class EventDetailFragment extends Fragment {
+
+    private Event event;
+    private TextView eventName;
+    private TextView eventTheme;
+    private TextView eventDescription;
+    private ImageView eventImage;
 
     public EventDetailFragment() {
     }
@@ -34,19 +47,17 @@ public class EventDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle args = new Bundle();
-        args.putParcelable("Event", getArguments().getParcelable("Event"));
+        event = getArguments().getParcelable("Event");
 
-        DetailNestedFragment detailNestedFragment = new DetailNestedFragment();
-        detailNestedFragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putParcelable("Event", event);
 
         MapNestedFragment mapNestedFragment = new MapNestedFragment();
         mapNestedFragment.setArguments(args);
 
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction()
-        .replace(R.id.detailFrame, detailNestedFragment)
-        .replace(R.id.mainMapFrame, mapNestedFragment)
+        .replace(R.id.eventMapFrame, mapNestedFragment)
         .addToBackStack(null)
         .commit();
 
@@ -60,6 +71,29 @@ public class EventDetailFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.activity_event_detail, container, false);
+        return inflater.inflate(R.layout.fragment_detail_02, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        eventName = view.findViewById(R.id.detailsName);
+        eventTheme = view.findViewById(R.id.detailsTheme);
+        eventImage = view.findViewById(R.id.app_bar_image);
+        eventDescription = view.findViewById(R.id.details_description);
+
+        eventName.setText(event.getName());
+        eventTheme.setText(event.getTheme());
+        eventDescription.setText(event.getDescription());
+        Picasso.get().load(event.getImageUrl()).into(this.eventImage);
+
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+//        ((MainActivity) getActivity()).getSupportActionBar().invalidateOptionsMenu();
+        Toolbar toolbar = view.findViewById(R.id.event_toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        toolbar.setTitle(event.getName());
+    }
+
+
 }

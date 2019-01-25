@@ -32,7 +32,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
             @Override public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 EventDetailFragment eventDetailFragment = EventDetailFragment.newInstance(event);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailFragment).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailFragment, "EVENT_FRAGMENT").addToBackStack(null).commit();
             }
         });
     }
