@@ -71,7 +71,7 @@ public class EventDetailFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_detail_02, container, false);
+        return inflater.inflate(R.layout.activity_event_detail, container, false);
     }
 
     @Override
