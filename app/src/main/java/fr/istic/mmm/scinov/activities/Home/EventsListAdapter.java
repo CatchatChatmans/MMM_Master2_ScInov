@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.helpers.Filter;
 import fr.istic.mmm.scinov.helpers.MyUtil;
 import fr.istic.mmm.scinov.model.Event;
 
@@ -20,11 +21,17 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     private List<Event> list;
     private List<Event> listCopy;
     private boolean hasSearchBar;
+    private Filter filter;
 
     public EventsListAdapter(boolean hasSearchBar) {
         this.list = new LinkedList<>();
         Log.i("SEARCHING", "adapter created");
         this.hasSearchBar = hasSearchBar;
+        filter  = new Filter();
+    }
+
+    public Filter getFilter(){
+        return filter;
     }
 
     public void setList(List<Event> list) {
@@ -61,10 +68,11 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
         }else{
             query = query.toLowerCase();
             for(Event event: listCopy){
-                if((event.getName() != null && event.getName().toLowerCase().contains(query))
-                || (event.getDescription() != null && event.getDescription().toLowerCase().contains(query))
-                || (event.getKeywords() != null && event.getKeywords().toLowerCase().contains(query))
-                || (event.getTheme() != null && event.getTheme().toLowerCase().contains(query))){
+                if((event.getName() != null && filter.isFilterByName() && event.getName().toLowerCase().contains(query))
+                || (event.getCity() != null && filter.isFilterByPlace() && event.getCity().toLowerCase().contains(query))
+                || (event.getDescription() != null && filter.isFilterByDescription() && event.getDescription().toLowerCase().contains(query))
+                || (event.getKeywords() != null && filter.isFilterByKeyword() && event.getKeywords().toLowerCase().contains(query))
+                || (event.getTheme() != null && filter.isFilterByTheme() && event.getTheme().toLowerCase().contains(query))){
                     list.add(event);
                 }
             }

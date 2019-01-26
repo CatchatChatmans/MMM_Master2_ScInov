@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_filter_title_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/dialog_filter_title_01"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/dialog_filter_checkbox_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/dialog_filter_search_in_name"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_title_01" />
+
+    <CheckBox
+        android:id="@+id/dialog_filter_checkbox_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/dialog_filter_search_in_place"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_checkbox_name" />
+
+    <CheckBox
+        android:id="@+id/dialog_filter_checkbox_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/dialog_filter_search_in_theme"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_checkbox_place" />
+
+    <CheckBox
+        android:id="@+id/dialog_filter_checkbox_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/dialog_filter_search_in_description"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_checkbox_theme" />
+
+    <CheckBox
+        android:id="@+id/dialog_filter_checkbox_keywords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/dialog_filter_search_in_keywords"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_checkbox_description" />
+
+    <TextView
+        android:id="@+id/dialog_filter_title_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dialog_filter_title_02"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_checkbox_keywords" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:entries="@array/dialog_filter_rating_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_filter_title_02"
+        app:layout_constraintStart_toEndOf="@+id/dialog_filter_title_02" />
+
+    <TextView
+        android:id="@+id/dialog_filter_title_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dialog_filter_title_03"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_title_02" />
+
+    <TextView
+        android:id="@+id/dialog_filter_title_04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dialog_filter_title_04"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_title_03" />
+
+    <TextView
+        android:id="@+id/dialog_filter_title_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dialog_filter_title_05"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_title_04" />
+
+    <TextView
+        android:id="@+id/dialog_filter_title_06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/dialog_filter_title_06"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dialog_filter_title_01"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_filter_title_05" />
+
+</android.support.constraint.ConstraintLayout>

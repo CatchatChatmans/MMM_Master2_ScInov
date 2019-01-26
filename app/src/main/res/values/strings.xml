@@ -24,5 +24,30 @@
     <string name="nav_login">Sign in</string>
     <string name="private_journeys_pager_title">My Journeys</string>
     <string name="shared_journeys_pager_title">Public Journeys</string>
+    <string name="filter_title">filter</string>
+    <string name="dialog_filter_title">Search filter</string>
+    <string name="dialog_ok">Apply</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_journey_list_title">Add event to...</string>
+    <string name="dialog_filter_title_01">Search in...</string>
+    <string name="dialog_filter_search_in_name">Name</string>
+    <string name="dialog_filter_search_in_place">Place</string>
+    <string name="dialog_filter_search_in_theme">Themes</string>
+    <string name="dialog_filter_search_in_description">Description</string>
+    <string name="dialog_filter_search_in_keywords">Keywords</string>
+    <string name="dialog_filter_title_02">Rating</string>
+    <string name="dialog_filter_title_03">Theme</string>
+    <string name="dialog_filter_title_04">Type</string>
+    <string name="dialog_filter_title_05">Place</string>
+    <string name="dialog_filter_title_06">Date</string>
+
+
+    <string-array name="dialog_filter_rating_spinner">
+        <item>All</item>
+        <item>4.0 &amp; up</item>
+        <item>3.0 &amp; up</item>
+        <item>2.0 &amp; up</item>
+        <item>1.0 &amp; up</item>
+    </string-array>
 
 </resources>

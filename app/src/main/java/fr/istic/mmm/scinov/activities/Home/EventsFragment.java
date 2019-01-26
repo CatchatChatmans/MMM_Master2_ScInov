@@ -1,11 +1,13 @@
 package fr.istic.mmm.scinov.activities.Home;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,8 +19,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -31,12 +35,13 @@ import fr.istic.mmm.scinov.helpers.MyUtil;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment implements FilterDialogFragment.FilterDialogListener {
     private RecyclerView recyclerView;
     private List<Event> events = new ArrayList<>();
     final EventsListAdapter adapter = new EventsListAdapter(true);
     private EventViewModel viewModel;
     private String currentSearchQuery;
+    FilterDialogFragment filterDialog;
     LiveData<List<Event>> liveData;
 
     public EventsFragment() {
@@ -66,6 +71,8 @@ public class EventsFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+
+        filterDialog = FilterDialogFragment.newInstance(adapter.getFilter());
 
         //get the view model from the main activity to avoid reloading the data
         viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
@@ -148,5 +155,39 @@ public class EventsFragment extends Fragment {
             searchView.setQuery(currentSearchQuery, true); // fill in the search term by default
             searchView.clearFocus(); // close the keyboard on load
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.filter:
+                filterDialog.show(getChildFragmentManager(),"DIALOG_FILTER");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogInterface dialog) {
+        CheckBox checkBoxName = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_name);
+        CheckBox checkBoxPlace = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_place);
+        CheckBox checkBoxThemes = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_theme);
+        CheckBox checkBoxDescription = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_description);
+        CheckBox checkBoxKeywords = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_keywords);
+
+        adapter.getFilter().setFilterByName(checkBoxName.isChecked());
+        adapter.getFilter().setFilterByPlace(checkBoxPlace.isChecked());
+        adapter.getFilter().setFilterByTheme(checkBoxThemes.isChecked());
+        adapter.getFilter().setFilterByDescription(checkBoxDescription.isChecked());
+        adapter.getFilter().setFilterByKeyword(checkBoxKeywords.isChecked());
+
+        adapter.filter(currentSearchQuery);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogInterface dialog) {
+
     }
 }
