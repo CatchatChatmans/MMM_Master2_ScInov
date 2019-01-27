@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.EventsListAdapter;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
+import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
@@ -64,6 +65,7 @@ public class JourneyDetailFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         EventViewModel eventViewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
+        JourneyViewModel journeyViewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
 
         Bundle bundle = getArguments();
         if(bundle != null){
@@ -82,6 +84,12 @@ public class JourneyDetailFragment extends Fragment {
             name.setText(journey.getName());
             author.setText(journey.getAuthor());
             isPublished.setChecked(journey.getPublished());
+
+            isPublished.setOnClickListener(isPublished -> {
+                journey.setPublished(!journey.getPublished());
+                journeyViewModel.setValue(journey);
+
+            });
 
         }
 
