@@ -30,10 +30,6 @@ public class FirebaseQueryLiveData extends LiveData<DataSnapshot> {
         this.query = query;
     }
 
-    public FirebaseQueryLiveData(DatabaseReference ref) {
-        this.query = ref;
-    }
-
     @Override
     protected void onActive() {
         Log.d(LOG_TAG, "onActive");
