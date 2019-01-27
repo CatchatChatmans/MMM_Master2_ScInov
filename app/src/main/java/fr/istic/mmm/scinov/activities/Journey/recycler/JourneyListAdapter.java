@@ -1,8 +1,8 @@
 package fr.istic.mmm.scinov.activities.Journey.recycler;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,16 +10,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.helpers.MyUtil;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
+import fr.istic.mmm.scinov.helpers.MyUtil;
 
 public class JourneyListAdapter extends RecyclerView.Adapter<JourneyViewHolder> {
 
-    List<Journey> list;
-    List<Journey> listCopy;
+    private List<Journey> list;
+    private List<Journey> listCopy;
+    private MenuItem menuSearchItem;
 
-    public JourneyListAdapter() {
+    public JourneyListAdapter(MenuItem menuSearchItem) {
         this.list = new LinkedList<>();
+        this.menuSearchItem = menuSearchItem;
      }
 
     public void setList(List<Journey> list) {
@@ -28,10 +30,16 @@ public class JourneyListAdapter extends RecyclerView.Adapter<JourneyViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void setMenuSearchItem(MenuItem menuSearchItem) {
+        this.menuSearchItem = menuSearchItem;
+    }
+
     @Override
     public JourneyViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.journey_card,viewGroup,false);
-        MyUtil.clickOutsideToUnfocusSearch(view,((Activity) viewGroup.getContext()).findViewById(R.id.search));
+        if(menuSearchItem != null){
+            MyUtil.clickOutsideToUnfocusSearch(view, menuSearchItem);
+        }
         return new JourneyViewHolder(view);
     }
 

@@ -38,7 +38,7 @@ import fr.istic.mmm.scinov.model.EventViewModel;
 public class EventsFragment extends Fragment implements FilterDialogFragment.FilterDialogListener {
     private RecyclerView recyclerView;
     private List<Event> events = new ArrayList<>();
-    final EventsListAdapter adapter = new EventsListAdapter(true);
+    final EventsListAdapter adapter = new EventsListAdapter(null);
     private EventViewModel viewModel;
     private String currentSearchQuery;
     FilterDialogFragment filterDialog;
@@ -112,10 +112,12 @@ public class EventsFragment extends Fragment implements FilterDialogFragment.Fil
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        MenuItem menuSearchItem =  menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuSearchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
-        MyUtil.clickOutsideToUnfocusSearch(getActivity().findViewById(R.id.activity_drawer),searchView);
+        adapter.setMenuSearchItem(menuSearchItem);
+        MyUtil.clickOutsideToUnfocusSearch(getActivity().findViewById(R.id.activity_drawer),menuSearchItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

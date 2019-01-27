@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -33,7 +34,7 @@ import fr.istic.mmm.scinov.helpers.MyUtil;
 public class PublicJourneyFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    final JourneyListAdapter adapter = new JourneyListAdapter();
+    final JourneyListAdapter adapter = new JourneyListAdapter(null);
     private JourneyViewModel viewModel;
     private String currentSearchQuery;
     LiveData<List<Journey>> liveData;
@@ -96,10 +97,12 @@ public class PublicJourneyFragment extends Fragment {
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        MenuItem menuSearchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuSearchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
-        MyUtil.clickOutsideToUnfocusSearch(getParentFragment().getActivity().findViewById(R.id.activity_drawer),searchView);
+        adapter.setMenuSearchItem(menuSearchItem);
+        MyUtil.clickOutsideToUnfocusSearch(getParentFragment().getActivity().findViewById(R.id.activity_drawer),menuSearchItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

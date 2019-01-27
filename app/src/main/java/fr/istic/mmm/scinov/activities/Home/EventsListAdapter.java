@@ -1,10 +1,10 @@
 package fr.istic.mmm.scinov.activities.Home;
 
-import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,18 +20,22 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
     private List<Event> list;
     private List<Event> listCopy;
-    private boolean hasSearchBar;
+    private MenuItem menuSearchItem;
     private Filter filter;
 
-    public EventsListAdapter(boolean hasSearchBar) {
+    public EventsListAdapter(MenuItem menuSearchItem) {
         this.list = new LinkedList<>();
         Log.i("SEARCHING", "adapter created");
-        this.hasSearchBar = hasSearchBar;
-        filter  = new Filter();
+        this.menuSearchItem = menuSearchItem;
+        filter = new Filter();
     }
 
     public Filter getFilter(){
         return filter;
+    }
+
+    public void setMenuSearchItem(MenuItem menuSearchItem){
+        this.menuSearchItem = menuSearchItem;
     }
 
     public void setList(List<Event> list) {
@@ -44,8 +48,8 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_card,viewGroup,false);
-        if(hasSearchBar){
-            MyUtil.clickOutsideToUnfocusSearch(view,((Activity) viewGroup.getContext()).findViewById(R.id.search));
+        if(menuSearchItem != null){
+            MyUtil.clickOutsideToUnfocusSearch(view, menuSearchItem);
         }
         return new EventViewHolder(view);
     }

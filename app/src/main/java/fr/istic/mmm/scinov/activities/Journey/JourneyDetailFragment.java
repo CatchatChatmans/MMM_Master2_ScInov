@@ -29,7 +29,7 @@ public class JourneyDetailFragment extends Fragment {
     private TextView author;
     private Switch isPublished;
     private RecyclerView recyclerView;
-    private final EventsListAdapter adapter = new EventsListAdapter(false);
+    private final EventsListAdapter adapter = new EventsListAdapter(null);
 
     public JourneyDetailFragment() {
         // Required empty public constructor
