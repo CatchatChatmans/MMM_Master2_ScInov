@@ -4,6 +4,7 @@ package fr.istic.mmm.scinov.activities.Journey.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
@@ -121,10 +122,12 @@ public class Journey implements Parcelable {
         }
     };
 
+    @Exclude
     public String getKey() {
         return key;
     }
 
+    @Exclude
     public void setKey(String key) {
         this.key = key;
     }

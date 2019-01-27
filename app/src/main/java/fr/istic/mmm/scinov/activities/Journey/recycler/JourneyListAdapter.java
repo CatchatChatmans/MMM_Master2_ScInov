@@ -13,7 +13,7 @@ import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 import fr.istic.mmm.scinov.helpers.MyUtil;
 
-public class JourneyListAdapter extends RecyclerView.Adapter<JourneyViewHolder> {
+public class JourneyListAdapter extends RecyclerView.Adapter<JourneyListViewHolder> {
 
     private List<Journey> list;
     private List<Journey> listCopy;
@@ -35,18 +35,18 @@ public class JourneyListAdapter extends RecyclerView.Adapter<JourneyViewHolder> 
     }
 
     @Override
-    public JourneyViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
+    public JourneyListViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.journey_card,viewGroup,false);
         if(menuSearchItem != null){
             MyUtil.clickOutsideToUnfocusSearch(view, menuSearchItem);
         }
-        return new JourneyViewHolder(view);
+        return new JourneyListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(JourneyViewHolder journeyViewHolder, int position) {
+    public void onBindViewHolder(JourneyListViewHolder journeyListViewHolder, int position) {
         Journey journey = list.get(position);
-        journeyViewHolder.bind(journey);
+        journeyListViewHolder.bind(journey);
     }
 
     @Override

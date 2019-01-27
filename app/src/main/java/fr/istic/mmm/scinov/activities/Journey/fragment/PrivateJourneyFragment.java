@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Journey.list;
+package fr.istic.mmm.scinov.activities.Journey.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
@@ -30,8 +30,7 @@ import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
 import fr.istic.mmm.scinov.activities.Journey.recycler.JourneyListAdapter;
 import fr.istic.mmm.scinov.helpers.MyUtil;
 
-
-public class PublicJourneyFragment extends Fragment {
+public class PrivateJourneyFragment extends Fragment {
 
     private RecyclerView recyclerView;
     final JourneyListAdapter adapter = new JourneyListAdapter(null);
@@ -39,22 +38,16 @@ public class PublicJourneyFragment extends Fragment {
     private String currentSearchQuery;
     LiveData<List<Journey>> liveData;
 
-    public PublicJourneyFragment() {
+    public PrivateJourneyFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_public_journey, container, false);
+        return inflater.inflate(R.layout.fragment_private_journey, container, false);
     }
 
     @Override
@@ -69,7 +62,7 @@ public class PublicJourneyFragment extends Fragment {
         //get the view model from the main activity to avoid reloading the data
         viewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
 
-        liveData = viewModel.getPublicJourneysLiveData();
+        liveData = viewModel.getPrivateJourneysLiveData();
 
         final ProgressBar progressBar = view.findViewById(R.id.journeys_progress_bar);
 
@@ -80,7 +73,7 @@ public class PublicJourneyFragment extends Fragment {
             public void onChanged(@Nullable List<Journey> journeysData) {
                 if (journeysData != null) {
                     progressBar.setVisibility(View.GONE);
-                    if(currentSearchQuery == null || currentSearchQuery.isEmpty()) {
+                    if (currentSearchQuery == null || currentSearchQuery.isEmpty()) {
 
                         adapter.setList(journeysData);
                     }
@@ -102,7 +95,7 @@ public class PublicJourneyFragment extends Fragment {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
         adapter.setMenuSearchItem(menuSearchItem);
-        MyUtil.clickOutsideToUnfocusSearch(getParentFragment().getActivity().findViewById(R.id.activity_drawer),menuSearchItem);
+        MyUtil.clickOutsideToUnfocusSearch(getParentFragment().getActivity().findViewById(R.id.activity_drawer), menuSearchItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -115,7 +108,7 @@ public class PublicJourneyFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String query) {
                 adapter.filter(query);
-                if(!query.equals(currentSearchQuery)){
+                if (!query.equals(currentSearchQuery)) {
                     recyclerView.smoothScrollToPosition(0);
                 }
                 currentSearchQuery = query;
@@ -126,9 +119,9 @@ public class PublicJourneyFragment extends Fragment {
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                if(searchView.getQuery().length() > 0){
+                if (searchView.getQuery().length() > 0) {
                     adapter.filter("");
-                }else{
+                } else {
                     searchView.clearFocus();
                     searchView.onActionViewCollapsed();
                 }
@@ -136,12 +129,11 @@ public class PublicJourneyFragment extends Fragment {
             }
         });
 
-        if(currentSearchQuery != null && (!currentSearchQuery.isEmpty())){
-            Log.i("SEARCHING",currentSearchQuery);
+        if (currentSearchQuery != null && (!currentSearchQuery.isEmpty())) {
+            Log.i("SEARCHING", currentSearchQuery);
             searchView.setIconified(false);
             searchView.setQuery(currentSearchQuery, true); // fill in the search term by default
             searchView.clearFocus(); // close the keyboard on load
         }
     }
-
 }

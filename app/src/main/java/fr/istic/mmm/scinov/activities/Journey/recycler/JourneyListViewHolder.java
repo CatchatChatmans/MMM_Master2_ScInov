@@ -7,10 +7,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.Journey.JourneyDetailFragment;
+import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDetailFragment;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 
-public class JourneyViewHolder extends RecyclerView.ViewHolder{
+public class JourneyListViewHolder extends RecyclerView.ViewHolder {
 
     private TextView journeyTitle;
     private TextView journeyAuthor;
@@ -18,7 +18,7 @@ public class JourneyViewHolder extends RecyclerView.ViewHolder{
     private Switch published;
     private Journey journey;
 
-    public JourneyViewHolder(View itemView) {
+    public JourneyListViewHolder(View itemView) {
         super(itemView);
         journeyTitle = itemView.findViewById(R.id.journeyName);
         journeyAuthor = itemView.findViewById(R.id.journeyAuthor);
@@ -32,7 +32,7 @@ public class JourneyViewHolder extends RecyclerView.ViewHolder{
         });
     }
 
-    public void bind(Journey journey){
+    public void bind(Journey journey) {
         this.journey = journey;
         journeyTitle.setText(journey.getName());
         journeyAuthor.setText(journey.getAuthor());

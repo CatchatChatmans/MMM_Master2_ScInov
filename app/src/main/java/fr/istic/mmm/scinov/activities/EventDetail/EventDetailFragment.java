@@ -10,7 +10,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ import java.util.List;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
-import fr.istic.mmm.scinov.activities.Journey.JourneyDialogFragment;
+import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDialogFragment;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
