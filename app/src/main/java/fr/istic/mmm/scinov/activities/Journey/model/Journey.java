@@ -13,6 +13,7 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Journey implements Parcelable {
 
+    private String key;
     private String name;
     private List<String> events = new ArrayList<>();
     private Boolean isPublished;
@@ -119,4 +120,12 @@ public class Journey implements Parcelable {
             return new Journey[size];
         }
     };
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 }

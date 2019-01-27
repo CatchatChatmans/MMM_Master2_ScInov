@@ -49,7 +49,9 @@ public class JourneyViewModel extends ViewModel {
                 new Thread(() -> {
                     List<Journey> journeys = new LinkedList<>();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        journeys.add(child.getValue(Journey.class));
+                        Journey journey = child.getValue(Journey.class);
+                        journey.setKey(child.getKey());
+                        journeys.add(journey);
                     }
                     mediatorLiveData.postValue(journeys);
                 }).start();
@@ -60,6 +62,6 @@ public class JourneyViewModel extends ViewModel {
     }
 
     public void setValue(Journey journey) {
-        JOURNEY_REF.child(String.valueOf(privateJourneysLiveData.getValue().indexOf(journey))).setValue(journey);
+        JOURNEY_REF.child(journey.getKey()).setValue(journey);
     }
 }
