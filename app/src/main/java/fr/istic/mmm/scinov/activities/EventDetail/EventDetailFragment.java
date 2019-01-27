@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -27,10 +28,6 @@ import fr.istic.mmm.scinov.model.EventViewModel;
 public class EventDetailFragment extends Fragment {
 
     private Event event;
-    private TextView eventName;
-    private TextView eventTheme;
-    private TextView eventDescription;
-    private ImageView eventImage;
 
     public EventDetailFragment() {
     }
@@ -51,6 +48,8 @@ public class EventDetailFragment extends Fragment {
 
         Bundle args = new Bundle();
         args.putParcelable("Event", event);
+
+
 
         MapNestedFragment mapNestedFragment = new MapNestedFragment();
         mapNestedFragment.setArguments(args);
@@ -78,22 +77,30 @@ public class EventDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        eventName = view.findViewById(R.id.detailsName);
-        eventTheme = view.findViewById(R.id.detailsTheme);
-        eventImage = view.findViewById(R.id.app_bar_image);
-        eventDescription = view.findViewById(R.id.details_description);
+        TextView eventName = view.findViewById(R.id.detailsName);
+        TextView eventTheme = view.findViewById(R.id.detailsTheme);
+        ImageView eventImage = view.findViewById(R.id.app_bar_image);
+        TextView eventDescription = view.findViewById(R.id.details_description);
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
         eventDescription.setText(event.getDescription());
-        Picasso.get().load(event.getImageUrl()).into(this.eventImage);
+        Picasso.get().load(event.getImageUrl()).into(eventImage);
 
         ((MainActivity) getActivity()).getSupportActionBar().hide();
 //        ((MainActivity) getActivity()).getSupportActionBar().invalidateOptionsMenu();
         Toolbar toolbar = view.findViewById(R.id.event_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle(event.getName());
+
+//        getActivity().findViewById(R.id.activity_drawer).setFitsSystemWindows(false);
+//
+//        Log.i("EVENT_DETAIL", Boolean.toString(getActivity().findViewById(R.id.activity_drawer).getFitsSystemWindows()));
+
+        //fix for the title display issue
+        CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar_layout);
+        collapsingToolbarLayout.post(() -> collapsingToolbarLayout.requestLayout());
+
+
     }
-
-
 }

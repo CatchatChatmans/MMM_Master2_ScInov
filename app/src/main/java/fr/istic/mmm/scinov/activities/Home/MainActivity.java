@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         // Set the toolbar as the action bar
         toolbar = findViewById(R.id.toolbar);
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.activity_drawer);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+//        drawer.setFitsSystemWindows(false);
+//        drawer.post(() -> drawer.requestLayout());
+        Log.i("MAIN_ACTIVITY", Boolean.toString(drawer.getFitsSystemWindows()));
 
         // Set the navigation
         NavigationView navigationView = findViewById(R.id.navigationView);
