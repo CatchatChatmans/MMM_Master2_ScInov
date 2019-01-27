@@ -73,7 +73,7 @@ public class JourneyDetailFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable List<Event> eventsData) {
                     if (eventsData != null) {
-                        List<Event> events = eventsData.stream().filter(event -> journey.getEvents().contains(Integer.parseInt(event.getId()))).collect(Collectors.toList());
+                        List<Event> events = eventsData.stream().filter(event -> journey.getEvents().contains(event.getId())).collect(Collectors.toList());
                         adapter.setList(events);
                     }
                 }

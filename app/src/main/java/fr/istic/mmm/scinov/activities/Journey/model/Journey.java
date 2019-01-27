@@ -14,7 +14,7 @@ import java.util.List;
 public class Journey implements Parcelable {
 
     private String name;
-    private List<Integer> events = new ArrayList<>();
+    private List<String> events = new ArrayList<>();
     private Boolean isPublished;
     private String author;
     private List<String> subcribers = new ArrayList<>();
@@ -33,12 +33,12 @@ public class Journey implements Parcelable {
     }
 
     @PropertyName("events")
-    public List<Integer> getEvents() {
+    public List<String> getEvents() {
         return events;
     }
 
     @PropertyName("events")
-    public void setEvents(List<Integer> events) {
+    public void setEvents(List<String> events) {
         this.events = events;
     }
 

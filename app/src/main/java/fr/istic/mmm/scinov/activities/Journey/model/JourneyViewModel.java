@@ -59,4 +59,7 @@ public class JourneyViewModel extends ViewModel {
         });
     }
 
+    public void setValue(Journey journey) {
+        JOURNEY_REF.child(String.valueOf(privateJourneysLiveData.getValue().indexOf(journey))).setValue(journey);
+    }
 }

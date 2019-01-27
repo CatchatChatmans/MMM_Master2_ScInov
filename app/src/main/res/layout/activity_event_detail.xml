@@ -60,10 +60,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:textColor="#4B4B4B"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/addJourney"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Name of the event" />
@@ -108,6 +108,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/details_description">
 
             </FrameLayout>
+
+            <ImageView
+                android:id="@+id/addJourney"
+                android:layout_width="28dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.062"
+                app:srcCompat="@android:drawable/ic_input_add" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 

@@ -10,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
+import fr.istic.mmm.scinov.activities.Journey.JourneyDialogFragment;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
@@ -81,6 +83,8 @@ public class EventDetailFragment extends Fragment {
         TextView eventTheme = view.findViewById(R.id.detailsTheme);
         ImageView eventImage = view.findViewById(R.id.app_bar_image);
         TextView eventDescription = view.findViewById(R.id.details_description);
+        ImageView addToJourney = view.findViewById((R.id.addJourney));
+
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
@@ -101,6 +105,10 @@ public class EventDetailFragment extends Fragment {
         CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar_layout);
         collapsingToolbarLayout.post(() -> collapsingToolbarLayout.requestLayout());
 
+        addToJourney.setOnClickListener(v -> {
+            JourneyDialogFragment jdf = JourneyDialogFragment.newInstance(event);
+            jdf.show(getFragmentManager(), null);
+        });
 
     }
 }
