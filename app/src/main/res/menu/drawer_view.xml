@@ -3,19 +3,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_events"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_nav_event"
             android:title="@string/nav_list" />
         <item
             android:id="@+id/nav_journey"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_nav_journeys"
             android:title="@string/nav_journey" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_nav_map"
             android:title="@string/nav_map" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@android:drawable/btn_star"
+            android:icon="@drawable/ic_settings"
             android:title="@string/nav_settings" />
     </group>
 </menu>
