@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Journey.list;
+package fr.istic.mmm.scinov.activities.Journey.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -47,7 +47,7 @@ public class JourneyListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_journey_list, container, false);
     }
 
-    public class FixedTabsPagerAdapter extends FragmentPagerAdapter{
+    public class FixedTabsPagerAdapter extends FragmentPagerAdapter {
 
         public FixedTabsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -60,7 +60,7 @@ public class JourneyListFragment extends Fragment {
 
         @Override
         public Fragment getItem(int i) {
-            switch(i){
+            switch (i) {
                 case 0:
                     return new PrivateJourneyFragment();
                 case 1:
@@ -73,7 +73,7 @@ public class JourneyListFragment extends Fragment {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            switch(position){
+            switch (position) {
                 case 0:
                     return getString(R.string.private_journeys_pager_title);
                 case 1:
@@ -83,7 +83,6 @@ public class JourneyListFragment extends Fragment {
             }
         }
     }
-
 
 
 }

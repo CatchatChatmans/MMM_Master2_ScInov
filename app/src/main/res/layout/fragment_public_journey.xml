@@ -5,7 +5,7 @@
     android:id="@+id/public_journey_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Journey.list.PublicJourneyFragment">
+    tools:context=".activities.Journey.fragment.PublicJourneyFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

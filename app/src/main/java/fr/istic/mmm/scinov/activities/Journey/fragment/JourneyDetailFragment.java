@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Journey;
+package fr.istic.mmm.scinov.activities.Journey.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -68,7 +68,7 @@ public class JourneyDetailFragment extends Fragment {
         JourneyViewModel journeyViewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
 
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             Journey journey = bundle.getParcelable("Journey");
 
             eventViewModel.getEventsLiveData().observe(this, new Observer<List<Event>>() {

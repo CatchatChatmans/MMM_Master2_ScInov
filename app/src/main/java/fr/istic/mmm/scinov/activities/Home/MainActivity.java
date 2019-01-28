@@ -20,7 +20,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.Journey.list.JourneyListFragment;
+import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyListFragment;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.activities.Map.FullMapFragment;
 import fr.istic.mmm.scinov.model.Event;

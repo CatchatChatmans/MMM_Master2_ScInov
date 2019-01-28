@@ -23,7 +23,7 @@ import java.util.List;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
-import fr.istic.mmm.scinov.activities.Journey.JourneyDialogFragment;
+import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDialogFragment;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
