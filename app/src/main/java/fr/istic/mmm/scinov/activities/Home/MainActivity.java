@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,11 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.List;
-
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyListFragment;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
@@ -99,15 +95,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
 
             case R.id.nav_events:
-                setTitle(R.string.nav_list);
+                getSupportActionBar().setTitle(R.string.nav_list);
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_journey:
-                setTitle(R.string.nav_journey);
+                getSupportActionBar().setTitle(R.string.nav_journey);
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new JourneyListFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_map:
-                setTitle(R.string.nav_map);
+                getSupportActionBar().setTitle(R.string.nav_map);
                 getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new FullMapFragment()).addToBackStack(null).commit();
                 break;
         }
@@ -118,18 +114,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-
-        final Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("EVENT_FRAGMENT");
-
-        Log.i("BACK_PRESSED","onBackPressed");
-        if (currentFragment != null && currentFragment.isVisible()) {
-            Log.i("BACK_PRESSED", currentFragment.getTag());
-            setSupportActionBar(toolbar);
-            getSupportActionBar().show();
-            toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-        }
-
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         } else {

@@ -202,7 +202,6 @@
                 android:layout_marginEnd="8dp"
                 android:onClick="searchButton"
                 android:text="Visiter le site"
-                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
                 app:layout_constraintEnd_toStartOf="@+id/coordInscr"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details_description" />
@@ -211,13 +210,11 @@
                 android:id="@+id/coordInscr"
                 android:layout_width="171dp"
                 android:layout_height="54dp"
-                android:layout_marginStart="35dp"
                 android:layout_marginTop="34dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/link"
                 app:layout_constraintTop_toBottomOf="@+id/details_description"
                 app:layout_constraintVertical_bias="1.0"
                 tools:text="coordInscr" />

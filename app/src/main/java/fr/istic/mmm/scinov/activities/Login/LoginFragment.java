@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_login);
         adapter = new FixedTabsPagerAdapter(getChildFragmentManager());
 
         pager = view.findViewById(R.id.pager);
@@ -41,7 +43,6 @@ public class LoginFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(pager);
     }
-
 
     public class FixedTabsPagerAdapter extends FragmentPagerAdapter{
 

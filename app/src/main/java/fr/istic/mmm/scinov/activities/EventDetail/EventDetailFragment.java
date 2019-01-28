@@ -13,6 +13,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -163,7 +166,6 @@ public class EventDetailFragment extends Fragment {
         mySnackbar.show();
     }
 
-
     public void searchButton(View view){
         if(event.getLien() != null) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLien()));
@@ -172,5 +174,17 @@ public class EventDetailFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.fetedelascience.fr/"));
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("EVENT DETAILS", "onStop");
+        DrawerLayout drawer = getActivity().findViewById(R.id.activity_drawer);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
     }
 }
