@@ -2,6 +2,7 @@ package fr.istic.mmm.scinov.activities.Home;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -73,16 +74,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(auth.getCurrentUser() != null){
             signInBtn.setText(getString(R.string.btn_logout));
             emailAddress.setText(auth.getCurrentUser().getEmail());
+            signInBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    auth.signOut();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+            });
+        }else{
+            signInBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setTitle(R.string.nav_login);
+                    drawer.closeDrawer(GravityCompat.START);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new LoginFragment()).addToBackStack(null).commit();
+                }
+            });
         }
-
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitle(R.string.nav_login);
-                drawer.closeDrawer(GravityCompat.START);
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new LoginFragment()).addToBackStack(null).commit();
-            }
-        });
 
         // Get the same viewModel for all the fragments
         viewModel = ViewModelProviders.of(this).get(EventViewModel.class);
