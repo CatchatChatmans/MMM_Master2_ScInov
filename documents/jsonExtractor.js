@@ -22,7 +22,8 @@ jsonContent.events.forEach(event => {
                          "ville": event.fields["ville"],
                          "lien_canonique": event.fields["lien_canonique"],
                          "thematiques": event.fields["thematiques"],
-                         "lien_d_inscription": event.fields["lien_d_inscription"]
+                         "lien_d_inscription": event.fields["lien_d_inscription"],
+                         "lien": event.fields["lien"]
                         };
 
 

@@ -36,9 +36,9 @@ public class EventViewModel extends ViewModel {
                             List<Event> events = new LinkedList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 Event event = child.getValue(Event.class);
+                                event.setKey(child.getKey());
                                 if(event.getRatings() != null){
                                     event.setAvgRating(event.getRatings().values().stream().mapToDouble(Double::doubleValue).average().orElse(0));
-                                    event.setKey(child.getKey());
                                     Log.i("RATING",Double.toString(event.getAvgRating()));
                                 }
 

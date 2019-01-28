@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -88,16 +90,23 @@ public class EventDetailFragment extends Fragment {
 
         TextView eventName = view.findViewById(R.id.detailsName);
         TextView eventTheme = view.findViewById(R.id.detailsTheme);
-        TextView eventCoord = view.findViewById(R.id.coord);
+        TextView eventAddr = view.findViewById(R.id.addr);
+        TextView eventDates = view.findViewById(R.id.dates);
         ImageView eventImage = view.findViewById(R.id.app_bar_image);
         TextView eventDescription = view.findViewById(R.id.details_description);
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
+        TextView eventCoord = view.findViewById(R.id.coordInscr);
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
-        eventCoord.setText(event.getLienInscription());
+        eventAddr.setText(event.getCity()+"("+event.getZipcode()+")\n"+event.getAddress());
+        eventDates.setText(event.getHours());
         eventDescription.setText(event.getDescription());
+        if(event.getLienInscription() != null)
+            eventCoord.setText("Coordonées d'inscriptions: "+event.getLienInscription());
+
+
         Picasso.get().load(event.getImageUrl()).into(eventImage);
 
         if(auth.getCurrentUser() != null){
@@ -152,5 +161,16 @@ public class EventDetailFragment extends Fragment {
             }
         });
         mySnackbar.show();
+    }
+
+
+    public void searchButton(View view){
+        if(event.getLien() != null) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLien()));
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.fetedelascience.fr/"));
+            startActivity(intent);
+        }
     }
 }
