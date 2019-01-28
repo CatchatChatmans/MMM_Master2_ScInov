@@ -21,6 +21,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -37,6 +41,7 @@ public class PrivateJourneyFragment extends Fragment {
     private JourneyViewModel viewModel;
     private String currentSearchQuery;
     LiveData<List<Journey>> liveData;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public PrivateJourneyFragment() {
         // Required empty public constructor
@@ -62,24 +67,33 @@ public class PrivateJourneyFragment extends Fragment {
         //get the view model from the main activity to avoid reloading the data
         viewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
 
-        liveData = viewModel.getPrivateJourneysLiveData();
-
         final ProgressBar progressBar = view.findViewById(R.id.journeys_progress_bar);
 
         progressBar.setVisibility(View.VISIBLE);
 
-        liveData.observe(this, new Observer<List<Journey>>() {
-            @Override
-            public void onChanged(@Nullable List<Journey> journeysData) {
-                if (journeysData != null) {
-                    progressBar.setVisibility(View.GONE);
-                    if (currentSearchQuery == null || currentSearchQuery.isEmpty()) {
+        TextView loginRequired = view.findViewById(R.id.journey_private_login_required);
+        loginRequired.setVisibility(View.GONE);
 
-                        adapter.setList(journeysData);
+        if(auth.getCurrentUser() != null){
+            liveData = viewModel.getPrivateJourneysLiveData(auth.getCurrentUser().getUid());
+            liveData.observe(this, new Observer<List<Journey>>() {
+                @Override
+                public void onChanged(@Nullable List<Journey> journeysData) {
+                    if (journeysData != null) {
+                        progressBar.setVisibility(View.GONE);
+                        if (currentSearchQuery == null || currentSearchQuery.isEmpty()) {
+
+                            adapter.setList(journeysData);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }else{
+            liveData = null;
+            progressBar.setVisibility(View.GONE);
+            loginRequired.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(),R.string.login_required,Toast.LENGTH_SHORT).show();
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

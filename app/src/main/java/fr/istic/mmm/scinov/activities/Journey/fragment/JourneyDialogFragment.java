@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -33,6 +36,7 @@ public class JourneyDialogFragment extends DialogFragment {
     private LiveData<List<Journey>> liveData;
     private EditText journeyName;
     private ImageView addJourney;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public JourneyDialogFragment() {
         // Required empty public constructor
@@ -52,7 +56,12 @@ public class JourneyDialogFragment extends DialogFragment {
 
         Event event = getArguments().getParcelable("Event");
         viewModel = ViewModelProviders.of(getActivity()).get(JourneyViewModel.class);
-        liveData = viewModel.getPrivateJourneysLiveData();
+        if(auth.getCurrentUser() != null){
+            liveData = viewModel.getPrivateJourneysLiveData(auth.getCurrentUser().getUid());
+        }else{
+            liveData = null;
+            Toast.makeText(getActivity(),R.string.login_required,Toast.LENGTH_SHORT).show();
+        }
         adapter = new JourneySelectionAdapter(event);
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_journey_dialog, null);
@@ -68,7 +77,12 @@ public class JourneyDialogFragment extends DialogFragment {
             if(journeyName.getText() == null) return;
             Journey journey = new Journey();
             journey.setName(journeyName.getText().toString());
-            viewModel.addJourney(journey);
+            if(auth.getCurrentUser() != null){
+                viewModel.addJourney(journey, auth.getCurrentUser().getUid());
+            }else{
+                Toast.makeText(getActivity(),R.string.login_required,Toast.LENGTH_SHORT).show();
+            }
+
             journeyName.setText("");
         });
 

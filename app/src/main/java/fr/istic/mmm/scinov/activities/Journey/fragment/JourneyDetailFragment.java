@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,7 @@ public class JourneyDetailFragment extends Fragment {
     private ImageView delete;
     private RecyclerView recyclerView;
     private final EventsListAdapter adapter = new EventsListAdapter(null);
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public JourneyDetailFragment() {
         // Required empty public constructor
@@ -89,18 +92,28 @@ public class JourneyDetailFragment extends Fragment {
             author.setText(journey.getAuthor());
             isPublished.setChecked(journey.getPublished());
 
-            isPublished.setOnClickListener(isPublished -> {
-                journey.setPublished(!journey.getPublished());
-                journeyViewModel.setValue(journey);
+            if(auth.getCurrentUser() != null && auth.getCurrentUser().getUid().equals(journey.getAuthor())) {
+                isPublished.setOnClickListener(isPublished -> {
+                    journey.setPublished(!journey.getPublished());
+                    journeyViewModel.setValue(journey);
 
-            });
+                });
+            }else{
+                isPublished.setEnabled(false);
+            }
 
-            delete.setOnClickListener(v -> {
-                journeyViewModel.deleteJourney(journey);
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                JourneyListFragment journeyListFragment = new JourneyListFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, journeyListFragment).addToBackStack(null).commit();
-            });
+            if(auth.getCurrentUser() != null && auth.getCurrentUser().getUid().equals(journey.getAuthor())){
+                delete.setOnClickListener(v -> {
+                    journeyViewModel.deleteJourney(journey);
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    JourneyListFragment journeyListFragment = new JourneyListFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, journeyListFragment).addToBackStack(null).commit();
+                });
+            }else{
+                delete.setVisibility(View.GONE);
+            }
+
+
 
         }
 

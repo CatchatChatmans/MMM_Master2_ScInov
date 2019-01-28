@@ -42,6 +42,7 @@
     <string name="dialog_filter_title_06">Date</string>
     <string name="btn_logout">Log out</string>
     <string name="login_required">You are not logged in</string>
+    <string name="journey_login_required">Connectez-vous pour voir vos parcours personalisés.</string>
 
 
     <string-array name="dialog_filter_rating_spinner">

@@ -19,7 +19,7 @@ public class JourneyViewModel extends ViewModel {
     private static final DatabaseReference JOURNEY_REF =
             FirebaseDatabase.getInstance().getReference("/journeys");
 
-    private final Query queryPrivateJourneys = JOURNEY_REF;
+    private Query queryPrivateJourneys = JOURNEY_REF;
     private final Query queryPublicJourneys = JOURNEY_REF.orderByChild("isPublished").equalTo(true);
 
     private FirebaseQueryLiveData liveDataPrivateJourneys = new FirebaseQueryLiveData(queryPrivateJourneys);
@@ -34,7 +34,11 @@ public class JourneyViewModel extends ViewModel {
     }
 
     @NonNull
-    public LiveData<List<Journey>> getPrivateJourneysLiveData() {
+    public LiveData<List<Journey>> getPrivateJourneysLiveData(String userId) {
+        privateJourneysLiveData.removeSource(liveDataPrivateJourneys);
+        queryPrivateJourneys = JOURNEY_REF.orderByChild("author").equalTo(userId);
+        liveDataPrivateJourneys = new FirebaseQueryLiveData(queryPrivateJourneys);
+        loadJourneys(liveDataPrivateJourneys, privateJourneysLiveData);
         return privateJourneysLiveData;
     }
 
@@ -65,7 +69,8 @@ public class JourneyViewModel extends ViewModel {
         JOURNEY_REF.child(journey.getKey()).setValue(journey);
     }
 
-    public void addJourney(Journey journey) {
+    public void addJourney(Journey journey, String userId) {
+        journey.setAuthor(userId);
        JOURNEY_REF.push().setValue(journey);
     }
 

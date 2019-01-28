@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDetailFragment;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
@@ -19,6 +21,7 @@ public class JourneyListViewHolder extends RecyclerView.ViewHolder {
     private TextView journeyNbEvents;
     private Switch published;
     private Journey journey;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public JourneyListViewHolder(View itemView) {
         super(itemView);
@@ -32,12 +35,6 @@ public class JourneyListViewHolder extends RecyclerView.ViewHolder {
             JourneyDetailFragment eventDetailFragment = JourneyDetailFragment.newInstance(journey);
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, eventDetailFragment).addToBackStack(null).commit();
         });
-
-        published.setOnClickListener(isPublished -> {
-            journey.setPublished(!journey.getPublished());
-            JourneyViewModel journeyViewModel = ViewModelProviders.of((AppCompatActivity) itemView.getContext()).get(JourneyViewModel.class);
-            journeyViewModel.setValue(journey);
-        });
     }
 
     public void bind(Journey journey) {
@@ -46,5 +43,15 @@ public class JourneyListViewHolder extends RecyclerView.ViewHolder {
         journeyAuthor.setText(journey.getAuthor());
         journeyNbEvents.setText(journey.getEvents().size() + " events");
         published.setChecked(journey.getPublished());
+
+        if(auth.getCurrentUser() != null && auth.getCurrentUser().getUid().equals(journey.getAuthor())) {
+            published.setOnClickListener(isPublished -> {
+                journey.setPublished(!journey.getPublished());
+                JourneyViewModel journeyViewModel = ViewModelProviders.of((AppCompatActivity) itemView.getContext()).get(JourneyViewModel.class);
+                journeyViewModel.setValue(journey);
+            });
+        }else{
+            published.setEnabled(false);
+        }
     }
 }
