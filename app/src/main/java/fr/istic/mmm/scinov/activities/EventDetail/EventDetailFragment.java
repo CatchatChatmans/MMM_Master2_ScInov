@@ -100,13 +100,13 @@ public class EventDetailFragment extends Fragment {
         ratingView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-
+                // TODO: Replace by currentUser userID
                 event.getRatings().put("Em2QrJxjaMYip8MgKnmcAET3dFk1",(double) rating);
                 viewModel.setValue(event);
             }
         });
 
-        // TODO: Replace by currentUser userID
+
         ((MainActivity) getActivity()).getSupportActionBar().hide();
 //        ((MainActivity) getActivity()).getSupportActionBar().invalidateOptionsMenu();
         Toolbar toolbar = view.findViewById(R.id.event_toolbar);
