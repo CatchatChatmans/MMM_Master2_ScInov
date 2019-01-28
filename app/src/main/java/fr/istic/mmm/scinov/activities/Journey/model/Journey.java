@@ -17,7 +17,7 @@ public class Journey implements Parcelable {
     private String key;
     private String name;
     private List<String> events = new ArrayList<>();
-    private Boolean isPublished;
+    private Boolean isPublished = false;
     private String author;
     private List<String> subcribers = new ArrayList<>();
 
