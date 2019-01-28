@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private EventViewModel viewModel;
     LiveData<List<Event>> liveData;
@@ -68,13 +71,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Set the sign in button
         View header = navigationView.getHeaderView(0);
         TextView signInBtn = header.findViewById(R.id.signin);
+        TextView emailAddress = header.findViewById(R.id.nav_email);
+
+
+        if(auth.getCurrentUser() != null){
+            signInBtn.setText(getString(R.string.btn_logout));
+            emailAddress.setText(auth.getCurrentUser().getEmail());
+        }
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new LoginFragment()).addToBackStack(null).commit();
                 setTitle(R.string.nav_login);
                 drawer.closeDrawer(GravityCompat.START);
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new LoginFragment()).addToBackStack(null).commit();
             }
         });
 
@@ -89,16 +99,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
 
             case R.id.nav_events:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).addToBackStack(null).commit();
                 setTitle(R.string.nav_list);
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new EventsFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_journey:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new JourneyListFragment()).addToBackStack(null).commit();
                 setTitle(R.string.nav_journey);
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new JourneyListFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_map:
-                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new FullMapFragment()).addToBackStack(null).commit();
                 setTitle(R.string.nav_map);
+                getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new FullMapFragment()).addToBackStack(null).commit();
                 break;
         }
 

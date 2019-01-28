@@ -1,5 +1,6 @@
 package fr.istic.mmm.scinov.activities.EventDetail;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,16 +8,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,6 +29,7 @@ import java.util.List;
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
 import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDialogFragment;
+import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
 
@@ -31,6 +37,7 @@ public class EventDetailFragment extends Fragment {
 
     private Event event;
     private EventViewModel viewModel;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public EventDetailFragment() {
     }
@@ -51,8 +58,6 @@ public class EventDetailFragment extends Fragment {
 
         Bundle args = new Bundle();
         args.putParcelable("Event", event);
-
-
 
         MapNestedFragment mapNestedFragment = new MapNestedFragment();
         mapNestedFragment.setArguments(args);
@@ -76,6 +81,7 @@ public class EventDetailFragment extends Fragment {
         return inflater.inflate(R.layout.activity_event_detail, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -88,45 +94,63 @@ public class EventDetailFragment extends Fragment {
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
 
-
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
         eventCoord.setText(event.getLienInscription());
         eventDescription.setText(event.getDescription());
         Picasso.get().load(event.getImageUrl()).into(eventImage);
 
-        // TODO: Replace by currentUser userID
-        ratingView.setRating((float) (double) event.getRatings().getOrDefault("Em2QrJxjaMYip8MgKnmcAET3dFk1", 0.0));
-
-
-        ratingView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                // TODO: Replace by currentUser userID
-                event.getRatings().put("Em2QrJxjaMYip8MgKnmcAET3dFk1",(double) rating);
-                viewModel.setValue(event);
-            }
-        });
-
+        if(auth.getCurrentUser() != null){
+            ratingView.setRating((float) (double) event.getRatings().getOrDefault(auth.getCurrentUser().getUid(), 0.0));
+            ratingView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    event.getRatings().put(auth.getCurrentUser().getUid(),(double) rating);
+                    viewModel.setValue(event);
+                }
+            });
+            addToJourney.setOnClickListener(v -> {
+                JourneyDialogFragment jdf = JourneyDialogFragment.newInstance(event);
+                jdf.show(getFragmentManager(), null);
+            });
+        }else{
+            ratingView.setRating(0.0f);
+            ratingView.setIsIndicator(true);
+            ratingView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.i("SNACKBAR getActionMasked",Integer.toString(event.getActionMasked()));
+                    Log.i("SNACKBAR getAction",Integer.toString(event.getAction()));
+                    if(event.getActionMasked() == MotionEvent.ACTION_DOWN){
+                        showSnackbarLogin(view);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            addToJourney.setOnClickListener(v -> {
+                showSnackbarLogin(view);
+            });
+        }
 
         ((MainActivity) getActivity()).getSupportActionBar().hide();
-//        ((MainActivity) getActivity()).getSupportActionBar().invalidateOptionsMenu();
         Toolbar toolbar = view.findViewById(R.id.event_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle(event.getName());
 
-//        getActivity().findViewById(R.id.activity_drawer).setFitsSystemWindows(false);
-//
-//        Log.i("EVENT_DETAIL", Boolean.toString(getActivity().findViewById(R.id.activity_drawer).getFitsSystemWindows()));
-
         //fix for the title display issue
         CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar_layout);
         collapsingToolbarLayout.post(() -> collapsingToolbarLayout.requestLayout());
+    }
 
-        addToJourney.setOnClickListener(v -> {
-            JourneyDialogFragment jdf = JourneyDialogFragment.newInstance(event);
-            jdf.show(getFragmentManager(), null);
+    private void showSnackbarLogin(View view){
+        Snackbar mySnackbar = Snackbar.make(view, R.string.login_required, Snackbar.LENGTH_LONG);
+        mySnackbar.setAction(R.string.nav_login, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, new LoginFragment()).addToBackStack(null).commit();
+            }
         });
-
+        mySnackbar.show();
     }
 }
