@@ -82,6 +82,7 @@ public class EventDetailFragment extends Fragment {
 
         TextView eventName = view.findViewById(R.id.detailsName);
         TextView eventTheme = view.findViewById(R.id.detailsTheme);
+        TextView eventCoord = view.findViewById(R.id.coord);
         ImageView eventImage = view.findViewById(R.id.app_bar_image);
         TextView eventDescription = view.findViewById(R.id.details_description);
         ImageView addToJourney = view.findViewById((R.id.addJourney));
@@ -90,6 +91,7 @@ public class EventDetailFragment extends Fragment {
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
+        eventCoord.setText(event.getLienInscription());
         eventDescription.setText(event.getDescription());
         Picasso.get().load(event.getImageUrl()).into(eventImage);
 

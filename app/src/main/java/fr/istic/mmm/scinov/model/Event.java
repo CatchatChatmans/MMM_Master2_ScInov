@@ -35,6 +35,7 @@ public class Event implements Parcelable {
     private List<Float> geolocation = new ArrayList<>();
     private Map<String,Double> ratings = new HashMap<>();
     private double avgRating = 0;
+    private String lienInscription;
 
 
     public Event() {
@@ -247,6 +248,18 @@ public class Event implements Parcelable {
         this.ratings = ratings;
     }
 
+
+    @PropertyName("lien_d_inscription")
+    public String getLienInscription() {
+        return lienInscription;
+    }
+
+    @PropertyName("lien_d_inscription")
+    public void setLienInscription(String lienInscription) {
+        this.lienInscription = lienInscription;
+    }
+
+
     public String getKey() {
         return key;
     }
@@ -281,6 +294,7 @@ public class Event implements Parcelable {
         descriptionShort = in.readString();
         description = in.readString();
         hours= in.readString();
+        lienInscription= in.readString();
         imageUrl= in.readString();
         keywords= in.readString();
         in.readList(geolocation,null);
@@ -313,6 +327,7 @@ public class Event implements Parcelable {
         dest.writeString(descriptionShort);
         dest.writeString(description);
         dest.writeString(hours);
+        dest.writeString(lienInscription);
         dest.writeString(imageUrl);
         dest.writeString(keywords);
         dest.writeList(geolocation);
