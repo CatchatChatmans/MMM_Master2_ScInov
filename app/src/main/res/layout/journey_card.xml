@@ -15,40 +15,54 @@
         android:minHeight="50dp">
 
 
-        <TextView
-            android:id="@+id/journeyName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/journey_pic_preview"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textColor="#4B4B4B"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="La vraie nature du Rhône" />
+            app:srcCompat="@drawable/ic_science_icon" />
 
-        <TextView
-            android:id="@+id/journey_nb_events"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/journeyName"
-            app:layout_constraintTop_toBottomOf="@+id/journeyName" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/journey_pic_preview"
+            app:layout_constraintEnd_toStartOf="@+id/journeyPublished"
+            app:layout_constraintStart_toEndOf="@+id/journey_pic_preview"
+            app:layout_constraintTop_toTopOf="@+id/journey_pic_preview">
 
-        <TextView
-            android:id="@+id/journeyAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/journeyName"
-            app:layout_constraintTop_toBottomOf="@+id/journey_nb_events" />
+            <TextView
+                android:id="@+id/journeyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#4B4B4B"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/journeyPublished"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/journey_pic_preview"
+                app:layout_constraintTop_toTopOf="@+id/journey_pic_preview"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:text="La vraie nature du Rhône" />
+
+            <TextView
+                android:id="@+id/journey_nb_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/journey_pic_preview"
+                app:layout_constraintStart_toStartOf="@+id/journeyName"
+                app:layout_constraintTop_toBottomOf="@+id/journeyName" />
+        </LinearLayout>
 
         <Switch
             android:id="@+id/journeyPublished"

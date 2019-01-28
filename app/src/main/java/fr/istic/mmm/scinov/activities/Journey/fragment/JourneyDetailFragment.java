@@ -31,7 +31,6 @@ import fr.istic.mmm.scinov.model.EventViewModel;
 public class JourneyDetailFragment extends Fragment {
 
     private TextView name;
-    private TextView author;
     private Switch isPublished;
     private ImageView delete;
     private RecyclerView recyclerView;
@@ -63,7 +62,6 @@ public class JourneyDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         name = view.findViewById(R.id.journeyName);
-        author = view.findViewById(R.id.journeyAuthor);
         isPublished = view.findViewById(R.id.journeyPublished);
         recyclerView = view.findViewById(R.id.recyclerView);
         delete = view.findViewById(R.id.deleteJourney);
@@ -89,7 +87,6 @@ public class JourneyDetailFragment extends Fragment {
             });
 
             name.setText(journey.getName());
-            author.setText(journey.getAuthor());
             isPublished.setChecked(journey.getPublished());
 
             if(auth.getCurrentUser() != null && auth.getCurrentUser().getUid().equals(journey.getAuthor())) {

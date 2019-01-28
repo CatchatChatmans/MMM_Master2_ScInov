@@ -53,7 +53,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
         Log.i("RATING_VIEW_HOLDER",Double.toString(event.getAvgRating()));
         ratingView.setRating((float) event.getAvgRating());
 
-        Picasso.get().load(event.getImageUrl()).into(this.imageView);
+        Picasso.get().load(event.getImageUrl()).placeholder(R.drawable.placeholder).into(this.imageView);
 
     }
 }

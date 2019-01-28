@@ -7,16 +7,6 @@
     tools:context=".activities.Journey.fragment.JourneyDetailFragment">
 
     <TextView
-        android:id="@+id/journeyAuthor"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/journeyName"
-        app:layout_constraintTop_toBottomOf="@+id/journeyName"
-        tools:text="Author" />
-
-    <TextView
         android:id="@+id/journeyName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,10 +22,11 @@
         android:id="@+id/journeyPublished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journeyName" />
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/journeyName"
+        app:layout_constraintEnd_toStartOf="@+id/deleteJourney"
+        app:layout_constraintTop_toTopOf="@+id/journeyName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -45,17 +36,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journeyAuthor" />
+        app:layout_constraintTop_toBottomOf="@+id/journeyName" />
 
     <ImageView
         android:id="@+id/deleteJourney"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="@+id/journeyName"
-        app:layout_constraintEnd_toEndOf="@+id/journeyPublished"
-        app:layout_constraintStart_toStartOf="@+id/journeyPublished"
-        app:layout_constraintTop_toTopOf="@+id/journeyName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
 
 
