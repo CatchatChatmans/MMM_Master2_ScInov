@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -111,21 +111,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="Description" />
 
-            <TextView
-                android:id="@+id/coordInscr"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="31dp"
-                android:layout_marginBottom="8dp"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
-                app:layout_constraintEnd_toEndOf="@+id/detailsTheme"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/detailsName"
-                app:layout_constraintTop_toBottomOf="@+id/details_description"
-                app:layout_constraintVertical_bias="0.34"
-                tools:text="Coord" />
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
@@ -143,13 +128,12 @@
             <FrameLayout
                 android:id="@+id/eventMapFrame"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
+                android:layout_height="82dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_description">
+                app:layout_constraintTop_toBottomOf="@+id/link">
 
             </FrameLayout>
 
@@ -208,6 +192,35 @@
                 app:layout_constraintTop_toBottomOf="@+id/detailsTheme"
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="Address" />
+
+            <Button
+                android:id="@+id/link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="searchButton"
+                android:text="Visiter le site"
+                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
+                app:layout_constraintEnd_toStartOf="@+id/coordInscr"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details_description" />
+
+            <TextView
+                android:id="@+id/coordInscr"
+                android:layout_width="171dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/link"
+                app:layout_constraintTop_toBottomOf="@+id/details_description"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="coordInscr" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
