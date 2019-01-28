@@ -82,17 +82,24 @@ public class EventDetailFragment extends Fragment {
 
         TextView eventName = view.findViewById(R.id.detailsName);
         TextView eventTheme = view.findViewById(R.id.detailsTheme);
-        TextView eventCoord = view.findViewById(R.id.coord);
+        TextView eventAddr = view.findViewById(R.id.addr);
+        TextView eventDates = view.findViewById(R.id.dates);
         ImageView eventImage = view.findViewById(R.id.app_bar_image);
         TextView eventDescription = view.findViewById(R.id.details_description);
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
+        TextView eventCoord = view.findViewById(R.id.coordInscr);
 
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
-        eventCoord.setText(event.getLienInscription());
+        eventAddr.setText(event.getCity()+"("+event.getZipcode()+")\n"+event.getAddress());
+        eventDates.setText(event.getHours());
         eventDescription.setText(event.getDescription());
+        if(event.getLienInscription() != null)
+            eventCoord.setText("Coordonées d'inscriptions: "+event.getLienInscription());
+
+
         Picasso.get().load(event.getImageUrl()).into(eventImage);
 
         // TODO: Replace by currentUser userID

@@ -111,13 +111,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="Description" />
 
+            <TextView
+                android:id="@+id/coordInscr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
+                app:layout_constraintEnd_toEndOf="@+id/detailsTheme"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/detailsName"
+                app:layout_constraintTop_toBottomOf="@+id/details_description"
+                app:layout_constraintVertical_bias="0.34"
+                tools:text="Coord" />
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="116dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_calendar"
-                app:layout_constraintStart_toStartOf="@+id/detailsTheme"
+                app:layout_constraintBottom_toTopOf="@+id/details_description"
+                app:layout_constraintEnd_toStartOf="@+id/dates"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailsTheme" />
 
             <FrameLayout
@@ -125,6 +145,8 @@
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details_description">
@@ -156,15 +178,37 @@
                 app:layout_constraintVertical_bias="0.6" />
 
             <TextView
-                android:id="@+id/coord"
-                android:layout_width="310dp"
-                android:layout_height="17dp"
+                android:id="@+id/dates"
+                android:layout_width="260dp"
+                android:layout_height="19dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="21dp"
+                app:layout_constraintBottom_toTopOf="@+id/details_description"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.111"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                tools:layout_editor_absoluteY="215dp"
-                tools:text="Coord" />
+                app:layout_constraintTop_toBottomOf="@+id/addr"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="Dates" />
+
+            <TextView
+                android:id="@+id/addr"
+                android:layout_width="313dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="310dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailsTheme"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Address" />
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
