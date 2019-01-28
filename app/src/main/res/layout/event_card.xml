@@ -58,7 +58,7 @@
             android:layout_marginBottom="8dp"
             android:numStars="5"
             android:rating="3"
-            android:stepSize="1"
+            android:stepSize="0.5"
             android:theme="@style/EventRatingBar"
             app:layout_constraintBottom_toBottomOf="@+id/eventImage"
             app:layout_constraintEnd_toEndOf="parent" />

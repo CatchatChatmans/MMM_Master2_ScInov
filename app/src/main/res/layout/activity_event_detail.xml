@@ -52,7 +52,28 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".activities.EventDetail.EventDetailFragment">
+            tools:context=".activities.EventDetail.EventDetailFragment"
+            tools:layout_editor_absoluteY="250dp">
+
+            <View
+                android:id="@+id/separator_01"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailsName" />
+
+            <View
+                android:id="@+id/separator_02"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="90dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator_01" />
 
             <TextView
                 android:id="@+id/detailsName"
@@ -60,10 +81,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:textColor="#4B4B4B"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/addJourney"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Name of the event" />
@@ -76,7 +97,7 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/detailsName"
                 app:layout_constraintStart_toStartOf="@+id/detailsName"
-                app:layout_constraintTop_toBottomOf="@+id/detailsName"
+                app:layout_constraintTop_toBottomOf="@+id/separator_02"
                 tools:text="Theme" />
 
             <TextView
@@ -84,6 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/detailsTheme"
                 app:layout_constraintStart_toStartOf="@+id/detailsName"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -111,17 +133,27 @@
 
             <ImageView
                 android:id="@+id/addJourney"
-                android:layout_width="28dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="24dp"
                 android:clickable="true"
-                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@+id/separator_02"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.062"
-                app:srcCompat="@android:drawable/ic_input_add" />
+                app:layout_constraintTop_toBottomOf="@+id/separator_01"
+                app:srcCompat="@drawable/ic_playlist_add" />
+
+            <RatingBar
+                android:id="@+id/details_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:stepSize="1"
+                android:theme="@style/EventRatingBar"
+                app:layout_constraintBottom_toTopOf="@+id/separator_02"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator_01"
+                app:layout_constraintVertical_bias="0.6" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 

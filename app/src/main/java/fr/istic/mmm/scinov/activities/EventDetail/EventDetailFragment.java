@@ -10,11 +10,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -30,6 +30,7 @@ import fr.istic.mmm.scinov.model.EventViewModel;
 public class EventDetailFragment extends Fragment {
 
     private Event event;
+    private EventViewModel viewModel;
 
     public EventDetailFragment() {
     }
@@ -63,7 +64,7 @@ public class EventDetailFragment extends Fragment {
         .commit();
 
         // Observe the live data from the view model of the main activity to avoid reloading the data when going back
-        EventViewModel viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(EventViewModel.class);
         LiveData<List<Event>> liveData = viewModel.getEventsLiveData();
         liveData.observe(this, new Observer<List<Event>>() {
             @Override
@@ -84,6 +85,7 @@ public class EventDetailFragment extends Fragment {
         ImageView eventImage = view.findViewById(R.id.app_bar_image);
         TextView eventDescription = view.findViewById(R.id.details_description);
         ImageView addToJourney = view.findViewById((R.id.addJourney));
+        RatingBar ratingView = view.findViewById((R.id.details_rating));
 
 
         eventName.setText(event.getName());
@@ -91,6 +93,20 @@ public class EventDetailFragment extends Fragment {
         eventDescription.setText(event.getDescription());
         Picasso.get().load(event.getImageUrl()).into(eventImage);
 
+        // TODO: Replace by currentUser userID
+        ratingView.setRating((float) (double) event.getRatings().getOrDefault("Em2QrJxjaMYip8MgKnmcAET3dFk1", 0.0));
+
+
+        ratingView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+                event.getRatings().put("Em2QrJxjaMYip8MgKnmcAET3dFk1",(double) rating);
+                viewModel.setValue(event);
+            }
+        });
+
+        // TODO: Replace by currentUser userID
         ((MainActivity) getActivity()).getSupportActionBar().hide();
 //        ((MainActivity) getActivity()).getSupportActionBar().invalidateOptionsMenu();
         Toolbar toolbar = view.findViewById(R.id.event_toolbar);

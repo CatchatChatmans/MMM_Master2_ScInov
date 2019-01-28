@@ -10,11 +10,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @IgnoreExtraProperties
 public class Event implements Parcelable {
 
+    private String key;
     private String id;
     private String name;
     private String type;
@@ -30,6 +33,8 @@ public class Event implements Parcelable {
     private String imageUrl;
     private String keywords;
     private List<Float> geolocation = new ArrayList<>();
+    private Map<String,Double> ratings = new HashMap<>();
+    private double avgRating = 0;
 
 
     public Event() {
@@ -230,6 +235,32 @@ public class Event implements Parcelable {
     @PropertyName("geolocalisation")
     public void setGeolocation(List<Float> geolocation) {
         this.geolocation = geolocation;
+    }
+
+    @PropertyName("ratings")
+    public Map<String, Double> getRatings() {
+        return ratings;
+    }
+
+    @PropertyName("ratings")
+    public void setRatings(Map<String, Double> ratings) {
+        this.ratings = ratings;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(double avgRating) {
+        this.avgRating = avgRating;
     }
 
     @Override

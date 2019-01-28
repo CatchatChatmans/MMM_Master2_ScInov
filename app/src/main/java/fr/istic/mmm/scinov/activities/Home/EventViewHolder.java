@@ -2,8 +2,10 @@ package fr.istic.mmm.scinov.activities.Home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -20,6 +22,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
     private TextView textViewView;
     private TextView secondaryTextView;
     private ImageView imageView;
+    private RatingBar ratingView;
     private Event event;
 
     public EventViewHolder(View itemView) {
@@ -27,6 +30,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
         textViewView = itemView.findViewById(R.id.eventName);
         imageView = itemView.findViewById(R.id.eventImage);
         secondaryTextView = itemView.findViewById(R.id.secondaryText);
+        ratingView = itemView.findViewById(R.id.ratingBar);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -45,6 +49,9 @@ public class EventViewHolder extends RecyclerView.ViewHolder{
             secondaryText +=  " (+ " + (event.getFormattedDates().size() - 1) + " dates)";
         }
         secondaryTextView.setText(secondaryText);
+
+        Log.i("RATING_VIEW_HOLDER",Double.toString(event.getAvgRating()));
+        ratingView.setRating((float) event.getAvgRating());
 
         Picasso.get().load(event.getImageUrl()).into(this.imageView);
 

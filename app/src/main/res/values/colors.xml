@@ -6,4 +6,5 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="colorAccent">#d81b60</color>
     <color name="gold">#FFBD00</color>
+    <color name="lightIcon">#bcbcbc</color>
 </resources>

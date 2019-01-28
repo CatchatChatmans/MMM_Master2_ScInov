@@ -1,6 +1,5 @@
 package fr.istic.mmm.scinov.model;
 
-import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.Observer;
@@ -11,16 +10,15 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class EventViewModel extends ViewModel {
-    private static final Query EVENT_REF =
+    private static final DatabaseReference EVENT_REF =
             FirebaseDatabase.getInstance().getReference("/events");
 
     private FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(EVENT_REF);
@@ -37,7 +35,14 @@ public class EventViewModel extends ViewModel {
                         public void run() {
                             List<Event> events = new LinkedList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                events.add(child.getValue(Event.class));
+                                Event event = child.getValue(Event.class);
+                                if(event.getRatings() != null){
+                                    event.setAvgRating(event.getRatings().values().stream().mapToDouble(Double::doubleValue).average().orElse(0));
+                                    event.setKey(child.getKey());
+                                    Log.i("RATING",Double.toString(event.getAvgRating()));
+                                }
+
+                                events.add(event);
                             }
                             Log.i("YOLO EVENTS 0", Long.toString(events.size()));
                             eventsLiveData.postValue(events);
@@ -64,4 +69,7 @@ public class EventViewModel extends ViewModel {
         return fakeLiveData;
     }
 
+    public void setValue(Event event) {
+        EVENT_REF.child(event.getKey()).setValue(event);
+    }
 }
