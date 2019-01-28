@@ -140,10 +140,6 @@ public class Event implements Parcelable {
         return dates;
     }
 
-    public String[] getListDates() {
-        return dates.split(";");
-    }
-
     @PropertyName("dates")
     public void setDates(String dates) {
         this.dates = dates;
