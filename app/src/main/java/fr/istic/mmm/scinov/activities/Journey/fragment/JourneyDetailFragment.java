@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -31,7 +31,7 @@ public class JourneyDetailFragment extends Fragment {
     private TextView name;
     private TextView author;
     private Switch isPublished;
-    private ImageButton delete;
+    private ImageView delete;
     private RecyclerView recyclerView;
     private final EventsListAdapter adapter = new EventsListAdapter(null);
 

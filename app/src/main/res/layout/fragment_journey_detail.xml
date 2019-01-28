@@ -47,20 +47,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/journeyAuthor" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/deleteJourney"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@android:drawable/ic_menu_delete"
-        app:layout_constraintBottom_toTopOf="@+id/journeyPublished"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
-        app:layout_constraintStart_toEndOf="@+id/journeyName"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/journeyName"
+        app:layout_constraintEnd_toEndOf="@+id/journeyPublished"
+        app:layout_constraintStart_toStartOf="@+id/journeyPublished"
+        app:layout_constraintTop_toTopOf="@+id/journeyName" />
 </android.support.constraint.ConstraintLayout>
 
 
