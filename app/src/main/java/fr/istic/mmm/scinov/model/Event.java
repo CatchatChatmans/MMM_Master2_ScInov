@@ -260,17 +260,6 @@ public class Event implements Parcelable {
         this.lienInscription = lienInscription;
     }
 
-    @PropertyName("lien")
-    public String getLien() {
-        return lienInscription;
-    }
-
-    @PropertyName("lien")
-    public void setLien(String lien) {
-        this.lien = lien;
-    }
-
-
     public String getKey() {
         return key;
     }
@@ -308,7 +297,6 @@ public class Event implements Parcelable {
         lienInscription= in.readString();
         imageUrl= in.readString();
         keywords= in.readString();
-        lien= in.readString();
         in.readList(geolocation,null);
 
     }
@@ -343,7 +331,6 @@ public class Event implements Parcelable {
         dest.writeString(imageUrl);
         dest.writeString(keywords);
         dest.writeList(geolocation);
-        dest.writeString(lien);
 
 
     }

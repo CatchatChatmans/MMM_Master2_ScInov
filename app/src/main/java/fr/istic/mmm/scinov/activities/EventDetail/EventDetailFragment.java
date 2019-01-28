@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -100,6 +101,8 @@ public class EventDetailFragment extends Fragment {
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
         TextView eventCoord = view.findViewById(R.id.coordInscr);
+        Button eventSearchButton = view.findViewById(R.id.link);
+
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme());
@@ -108,6 +111,7 @@ public class EventDetailFragment extends Fragment {
         eventDescription.setText(event.getDescription());
         if(event.getLienInscription() != null)
             eventCoord.setText("Coordonées d'inscriptions: "+event.getLienInscription());
+        eventSearchButton.setOnClickListener(this::searchButton);
 
 
         Picasso.get().load(event.getImageUrl()).into(eventImage);
@@ -167,8 +171,10 @@ public class EventDetailFragment extends Fragment {
     }
 
     public void searchButton(View view){
-        if(event.getLien() != null) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLien()));
+        Log.i("SearchButtonClicked","addr:"+event.getLink());
+
+        if(event.getLink() != null) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
             startActivity(intent);
         }else{
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.fetedelascience.fr/"));
