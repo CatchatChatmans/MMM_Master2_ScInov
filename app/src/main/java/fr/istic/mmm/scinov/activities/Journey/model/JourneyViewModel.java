@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -71,6 +70,6 @@ public class JourneyViewModel extends ViewModel {
     }
 
     public void deleteJourney(Journey journey) {
-        JOURNEY_REF.push().child(journey.getKey()).setValue(null);
+        JOURNEY_REF.child(journey.getKey()).setValue(null);
     }
 }
