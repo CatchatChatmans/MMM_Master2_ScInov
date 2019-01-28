@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -29,6 +31,7 @@ public class JourneyDetailFragment extends Fragment {
     private TextView name;
     private TextView author;
     private Switch isPublished;
+    private ImageButton delete;
     private RecyclerView recyclerView;
     private final EventsListAdapter adapter = new EventsListAdapter(null);
 
@@ -60,6 +63,7 @@ public class JourneyDetailFragment extends Fragment {
         author = view.findViewById(R.id.journeyAuthor);
         isPublished = view.findViewById(R.id.journeyPublished);
         recyclerView = view.findViewById(R.id.recyclerView);
+        delete = view.findViewById(R.id.deleteJourney);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -89,6 +93,13 @@ public class JourneyDetailFragment extends Fragment {
                 journey.setPublished(!journey.getPublished());
                 journeyViewModel.setValue(journey);
 
+            });
+
+            delete.setOnClickListener(v -> {
+                journeyViewModel.deleteJourney(journey);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                JourneyListFragment journeyListFragment = new JourneyListFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.activity_content, journeyListFragment).addToBackStack(null).commit();
             });
 
         }

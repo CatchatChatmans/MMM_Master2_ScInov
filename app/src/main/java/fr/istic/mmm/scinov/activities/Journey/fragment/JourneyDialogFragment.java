@@ -12,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import java.util.List;
@@ -29,6 +31,8 @@ public class JourneyDialogFragment extends DialogFragment {
     private JourneySelectionAdapter adapter;
     private JourneyViewModel viewModel;
     private LiveData<List<Journey>> liveData;
+    private EditText journeyName;
+    private ImageView addJourney;
 
     public JourneyDialogFragment() {
         // Required empty public constructor
@@ -57,6 +61,16 @@ public class JourneyDialogFragment extends DialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
+        journeyName = view.findViewById(R.id.journeyName);
+        addJourney = view.findViewById(R.id.addJourney);
+
+        addJourney.setOnClickListener(v -> {
+            if(journeyName.getText() == null) return;
+            Journey journey = new Journey();
+            journey.setName(journeyName.getText().toString());
+            viewModel.addJourney(journey);
+            journeyName.setText("");
+        });
 
         final ProgressBar progressBar = view.findViewById(R.id.journeys_progress_bar);
 
@@ -77,8 +91,10 @@ public class JourneyDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.dialog_ok, (dialog, id) -> {
             adapter.getJourneysAdded().forEach(journey -> {
                 Log.i("YOLO", "Adding event: " + event.getId() + " from journey: " + journey.getKey());
-                journey.getEvents().add(event.getId());
-                viewModel.setValue(journey);
+                if(!journey.getEvents().contains(event.getId())) {
+                    journey.getEvents().add(event.getId());
+                    viewModel.setValue(journey);
+                }
             });
             adapter.getJourneysRemoved().forEach(journey -> {
                 Log.i("YOLO", "Removing event: " + event.getId() + " from journey: " + journey.getKey());

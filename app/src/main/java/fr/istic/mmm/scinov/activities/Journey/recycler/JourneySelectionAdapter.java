@@ -30,7 +30,7 @@ public class JourneySelectionAdapter extends RecyclerView.Adapter<JourneySelecti
 
     public void setList(List<Journey> list) {
         this.list = list;
-
+        this.state = new ArrayList<>();
         this.list.forEach(j -> state.add(j.getEvents().contains(event.getId())));
 
         notifyDataSetChanged();
