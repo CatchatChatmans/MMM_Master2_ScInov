@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Cette application à pour but de fournir une application android pour les visiteurs de la fête de la science, ainsi que les responsables des événements.
+Cette application a pour but de fournir une application android pour les visiteurs de la fête de la science, ainsi que les responsables des événements.
 L'idée étant de fournir une plateforme ou chacuns peu organiser ses visites ainsi que noter donner son avis.
 
 Ce projet a été réalisé dans le cadre d'études, et à pour but de de decuvrir le dévellopement d'une application dans l'environnement Android.
@@ -43,7 +43,7 @@ The powerfull open source library [Picasso](http://square.github.io/picasso/)
 
 ## Find out more
 
-[/Doc](https://github.com/PosnicAntoine/MMM_Master2_ScInov/tree/master/Doc) possédes quelques informations sur l'architecture de l'application.
+[/Doc](https://github.com/PosnicAntoine/MMM_Master2_ScInov/tree/master/Doc) posséde quelques informations sur l'architecture de l'application.
 
 #
 
