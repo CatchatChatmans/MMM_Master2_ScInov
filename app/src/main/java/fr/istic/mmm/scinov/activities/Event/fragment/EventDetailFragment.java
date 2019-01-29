@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -220,11 +222,17 @@ public class EventDetailFragment extends Fragment {
         ((MainActivity) getActivity()).getSupportActionBar().hide();
         Toolbar toolbar = view.findViewById(R.id.event_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle(event.getName());;
+        toolbar.setTitle(event.getName());
+        toolbar.setTitleMarginEnd(20);
 
         //fix for the title display issue
         CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar_layout);
         collapsingToolbarLayout.post(() -> collapsingToolbarLayout.requestLayout());
+
+        ViewCompat.setTransitionName(view.findViewById(R.id.appbar),"EXTRA_IMAGE");
+        collapsingToolbarLayout.setTitle(event.getName());
+        collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
+
     }
 
     private void showSnackbarLogin(View view){
@@ -274,6 +282,7 @@ public class EventDetailFragment extends Fragment {
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         toolbar.setTitle(event.getName());
+        toolbar.setTitleMarginEnd(20);
     }
 
     private boolean hideInfoIfNull(TextView textView, ImageView imageView){
