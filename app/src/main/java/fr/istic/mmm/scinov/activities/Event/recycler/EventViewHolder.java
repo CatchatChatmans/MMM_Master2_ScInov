@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Home;
+package fr.istic.mmm.scinov.activities.Event.recycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.EventDetail.EventDetailFragment;
-import fr.istic.mmm.scinov.model.Event;
+import fr.istic.mmm.scinov.activities.Event.fragment.EventDetailFragment;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
 
 public class EventViewHolder extends RecyclerView.ViewHolder{
 

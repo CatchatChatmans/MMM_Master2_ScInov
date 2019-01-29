@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Home;
+package fr.istic.mmm.scinov.activities.Event.fragment;
 
 import android.app.Dialog;
 import android.content.Context;

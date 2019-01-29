@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.Home.EventsListAdapter;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
+import fr.istic.mmm.scinov.activities.Event.recycler.EventsListAdapter;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class JourneyDetailFragment extends Fragment {
 

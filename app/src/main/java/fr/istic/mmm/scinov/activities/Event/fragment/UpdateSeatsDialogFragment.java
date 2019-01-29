@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.EventDetail;
+package fr.istic.mmm.scinov.activities.Event.fragment;
 
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
 
 public class UpdateSeatsDialogFragment extends DialogFragment {
 

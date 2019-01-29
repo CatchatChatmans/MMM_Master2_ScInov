@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.EventDetail;
+package fr.istic.mmm.scinov.activities.Event.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
 
 public class MapNestedFragment extends Fragment {
 

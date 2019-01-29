@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
-import fr.istic.mmm.scinov.model.Event;
 
 public class JourneySelectionAdapter extends RecyclerView.Adapter<JourneySelectionViewHolder> {
 

@@ -22,10 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
 import fr.istic.mmm.scinov.activities.Journey.recycler.JourneySelectionAdapter;
-import fr.istic.mmm.scinov.model.Event;
 
 public class JourneyDialogFragment extends DialogFragment {
 

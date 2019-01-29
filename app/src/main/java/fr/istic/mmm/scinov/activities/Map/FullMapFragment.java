@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.EventDetail.MapNestedFragment;
 
 public class FullMapFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.model;
+package fr.istic.mmm.scinov.activities.Event.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
@@ -16,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 
 public class EventViewModel extends ViewModel {
     private static final DatabaseReference EVENT_REF =

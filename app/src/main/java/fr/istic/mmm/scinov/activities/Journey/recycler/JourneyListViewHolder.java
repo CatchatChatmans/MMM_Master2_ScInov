@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
 import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDetailFragment;
 import fr.istic.mmm.scinov.activities.Journey.model.Journey;
 import fr.istic.mmm.scinov.activities.Journey.model.JourneyViewModel;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class JourneyListViewHolder extends RecyclerView.ViewHolder {
 

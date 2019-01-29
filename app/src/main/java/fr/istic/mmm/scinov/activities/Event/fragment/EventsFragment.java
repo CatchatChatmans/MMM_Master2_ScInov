@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Home;
+package fr.istic.mmm.scinov.activities.Event.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -31,9 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
+import fr.istic.mmm.scinov.activities.Event.recycler.EventsListAdapter;
 import fr.istic.mmm.scinov.helpers.MyUtil;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class EventsFragment extends Fragment implements FilterDialogFragment.FilterDialogListener {
     private RecyclerView recyclerView;

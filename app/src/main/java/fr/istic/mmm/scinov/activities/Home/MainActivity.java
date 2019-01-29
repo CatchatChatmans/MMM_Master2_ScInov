@@ -27,11 +27,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.fragment.EventsFragment;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
 import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyListFragment;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.activities.Map.FullMapFragment;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
 import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

@@ -22,10 +22,10 @@ import java.util.List;
 import java.util.Objects;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.EventDetail.EventDetailFragment;
-import fr.istic.mmm.scinov.activities.Home.EventsFragment;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
+import fr.istic.mmm.scinov.activities.Event.fragment.EventDetailFragment;
+import fr.istic.mmm.scinov.activities.Event.fragment.EventsFragment;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
 
 public class ClusteredMapFragment extends Fragment {
 

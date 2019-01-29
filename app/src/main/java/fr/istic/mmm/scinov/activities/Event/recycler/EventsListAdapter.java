@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.Home;
+package fr.istic.mmm.scinov.activities.Event.recycler;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
 import fr.istic.mmm.scinov.helpers.Filter;
 import fr.istic.mmm.scinov.helpers.MyUtil;
-import fr.istic.mmm.scinov.model.Event;
 
 public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 

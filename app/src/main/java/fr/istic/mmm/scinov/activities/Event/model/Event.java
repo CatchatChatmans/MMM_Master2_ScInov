@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.model;
+package fr.istic.mmm.scinov.activities.Event.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

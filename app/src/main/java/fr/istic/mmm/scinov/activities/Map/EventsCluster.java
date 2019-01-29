@@ -3,7 +3,7 @@ package fr.istic.mmm.scinov.activities.Map;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
-import fr.istic.mmm.scinov.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
 
 public class EventsCluster implements ClusterItem {
     private final LatLng mPosition;

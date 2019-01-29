@@ -1,4 +1,4 @@
-package fr.istic.mmm.scinov.activities.EventDetail;
+package fr.istic.mmm.scinov.activities.Event.fragment;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
@@ -37,11 +37,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.istic.mmm.scinov.R;
+import fr.istic.mmm.scinov.activities.Event.model.Event;
+import fr.istic.mmm.scinov.activities.Event.model.EventViewModel;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
 import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDialogFragment;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
-import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
 import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 
 public class EventDetailFragment extends Fragment {
@@ -91,7 +91,7 @@ public class EventDetailFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.activity_event_detail, container, false);
+        return inflater.inflate(R.layout.fragment_event_detail, container, false);
     }
 
     @SuppressLint("ClickableViewAccessibility")
