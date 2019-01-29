@@ -34,6 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.activities.Home.MainActivity;
@@ -105,20 +107,38 @@ public class EventDetailFragment extends Fragment {
         TextView eventDescription = view.findViewById(R.id.details_description);
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
-        TextView eventCoord = view.findViewById(R.id.coordInscr);
         TextView eventSeatsLeft = view.findViewById(R.id.details_seats_left);
         Button eventSearchButton = view.findViewById(R.id.link);
         ImageView updateSeats = view.findViewById(R.id.update_seats);
+        TextView eventEmail = view.findViewById(R.id.details_email);
+        TextView eventPhone = view.findViewById(R.id.details_phone);
+        TextView eventWebsite = view.findViewById(R.id.details_website);
+        TextView control = view.findViewById(R.id.control);
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme().replaceAll("\\|", ", "));
         eventAddr.setText(event.getAddress());
         eventDates.setText(event.getHours());
         eventDescription.setText(event.getDescription());
-        if(event.getLienInscription() != null)
-            eventCoord.setText("Coordonées d'inscriptions: "+event.getLienInscription());
+        if(event.getLienInscription() != null){
+            control.setText(event.getLienInscription());
+            Matcher matcherEmail = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(event.getLienInscription());
+            while (matcherEmail.find()) {
+                eventEmail.setText(matcherEmail.group());
+            }
+            Matcher matcherPhone = Pattern.compile("(0|\\+33|0033)[1-9]((.|\\s|-)?\\d{2}){4}").matcher(event.getLienInscription());
+            while (matcherPhone.find()) {
+                eventPhone.setText(matcherPhone.group());
+            }
+            Matcher matcherWebsite = Pattern.compile("(?:^|[^@\\.\\w-])((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*").matcher(event.getLienInscription());
+            while (matcherWebsite.find()) {
+                eventWebsite.setText(matcherWebsite.group());
+            }
+        }
+
         eventSearchButton.setOnClickListener(this::searchButton);
         eventSeatsLeft.setText((event.getSeatsAvailable() - event.getSeatsTaken()) + " places restantes");
+
 
 
         Picasso.get().load(event.getImageUrl()).into(eventImage);

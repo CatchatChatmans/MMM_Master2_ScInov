@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/coordInscr"
+        app:layout_constraintTop_toBottomOf="@+id/details_phone"
         app:srcCompat="@drawable/ic_email" />
 
     <ImageView
@@ -233,8 +233,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        app:layout_constraintEnd_toEndOf="@+id/coordInscr"
-        app:layout_constraintStart_toStartOf="@+id/coordInscr"
+        app:layout_constraintEnd_toEndOf="@+id/details_phone"
+        app:layout_constraintStart_toStartOf="@+id/details_phone"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
         tools:text="Address" />
 
@@ -252,7 +252,7 @@
         app:layout_constraintTop_toBottomOf="@+id/separator_04" />
 
     <TextView
-        android:id="@+id/coordInscr"
+        android:id="@+id/details_phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/dates"
@@ -282,7 +282,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
     <TextView
-        android:id="@+id/details_wesite"
+        android:id="@+id/details_website"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -303,6 +303,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator_03" />
 
 </android.support.constraint.ConstraintLayout>
 
