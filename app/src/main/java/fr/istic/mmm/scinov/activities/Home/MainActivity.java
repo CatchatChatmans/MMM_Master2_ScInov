@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userLiveData.observe(this, new Observer<DataSnapshot>() {
                 @Override
                 public void onChanged(@Nullable DataSnapshot dataSnapshot) {
-                    Log.i("USER ROLE", (String) dataSnapshot.getValue());
+                    if (dataSnapshot != null) {
+                        Log.i("USER ROLE", (String) dataSnapshot.getValue());
+                    }
                 }
             });
         }
