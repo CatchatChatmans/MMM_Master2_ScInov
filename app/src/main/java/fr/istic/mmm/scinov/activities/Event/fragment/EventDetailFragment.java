@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -263,7 +264,21 @@ public class EventDetailFragment extends Fragment {
                         "mailto", ((TextView) view).getText().toString(), null));
                 startActivity(intent);
                 break;
+            case R.id.dates:
+                intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType("vnd.android.cursor.dir/event");
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getFormattedDates().get(0).getTime());
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getFormattedDates().get(0).getTime());
 
+                intent.putExtra(CalendarContract.Events.TITLE, event.getName());
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, event.getDescriptionShort());
+                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, event.getAddress());
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+
+                break;
             default:
                     break;
         }
