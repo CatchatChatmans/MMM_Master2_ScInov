@@ -1,5 +1,7 @@
 # ScInov: Une application android pour la fête de la science
 
+![Find out more about Fête de la Science](https://media.fetedelascience.fr/image/Mediatheque/23/3/logo_fds_977233.png)
+
 ## Introduction
 
 Cette application a pour but de fournir une application android pour les visiteurs de la fête de la science, ainsi que les responsables des événements.
