@@ -247,16 +247,23 @@ public class EventDetailFragment extends Fragment {
     }
 
     public void manageClick(View view){
+        Intent intent;
         switch (view.getId()){
             case R.id.details_website:
                 Log.i("DO STUFF","go to website");
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
                 startActivity(intent);
                 break;
             case R.id.details_phone:
-                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ((TextView) view).getText().toString()));
-                startActivity(intentCall);
+                intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ((TextView) view).getText().toString()));
+                startActivity(intent);
                 break;
+            case R.id.details_email:
+                intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", ((TextView) view).getText().toString(), null));
+                startActivity(intent);
+                break;
+
             default:
                     break;
         }
