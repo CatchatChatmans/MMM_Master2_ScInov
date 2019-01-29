@@ -103,10 +103,9 @@ public class EventDetailFragment extends Fragment {
         TextView eventCoord = view.findViewById(R.id.coordInscr);
         Button eventSearchButton = view.findViewById(R.id.link);
 
-
         eventName.setText(event.getName());
-        eventTheme.setText(event.getTheme());
-        eventAddr.setText(event.getCity()+"("+event.getZipcode()+")\n"+event.getAddress());
+        eventTheme.setText(event.getTheme().replaceAll("\\|", ", "));
+        eventAddr.setText(event.getAddress());
         eventDates.setText(event.getHours());
         eventDescription.setText(event.getDescription());
         if(event.getLienInscription() != null)

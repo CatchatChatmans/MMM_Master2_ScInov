@@ -40,185 +40,21 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
-        <android.support.constraint.ConstraintLayout
+        <include
+            layout="@layout/content_event_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".activities.EventDetail.EventDetailFragment"
-            tools:layout_editor_absoluteY="250dp">
+            android:layout_height="wrap_content" />
 
-            <View
-                android:id="@+id/separator_01"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsName" />
-
-            <View
-                android:id="@+id/separator_02"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="90dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator_01" />
-
-            <TextView
-                android:id="@+id/detailsName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="#4B4B4B"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Name of the event" />
-
-            <TextView
-                android:id="@+id/detailsTheme"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/detailsName"
-                app:layout_constraintStart_toStartOf="@+id/detailsName"
-                app:layout_constraintTop_toBottomOf="@+id/separator_02"
-                tools:text="Theme" />
-
-            <TextView
-                android:id="@+id/details_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/detailsTheme"
-                app:layout_constraintStart_toStartOf="@+id/detailsName"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                tools:text="Description" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="116dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="16dp"
-                android:src="@drawable/ic_calendar"
-                app:layout_constraintBottom_toTopOf="@+id/details_description"
-                app:layout_constraintEnd_toStartOf="@+id/dates"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsTheme" />
-
-            <FrameLayout
-                android:id="@+id/eventMapFrame"
-                android:layout_width="0dp"
-                android:layout_height="82dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/link">
-
-            </FrameLayout>
-
-            <ImageView
-                android:id="@+id/addJourney"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="24dp"
-                android:clickable="true"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toTopOf="@+id/separator_02"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator_01"
-                app:srcCompat="@drawable/ic_playlist_add" />
-
-            <RatingBar
-                android:id="@+id/details_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:stepSize="1"
-                android:theme="@style/EventRatingBar"
-                app:layout_constraintBottom_toTopOf="@+id/separator_02"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator_01"
-                app:layout_constraintVertical_bias="0.6" />
-
-            <TextView
-                android:id="@+id/dates"
-                android:layout_width="260dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="21dp"
-                app:layout_constraintBottom_toTopOf="@+id/details_description"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.111"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/addr"
-                app:layout_constraintVertical_bias="1.0"
-                tools:text="Dates" />
-
-            <TextView
-                android:id="@+id/addr"
-                android:layout_width="313dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="310dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsTheme"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="Address" />
-
-            <Button
-                android:id="@+id/link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Visiter le site"
-                app:layout_constraintEnd_toStartOf="@+id/coordInscr"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_description" />
-
-            <TextView
-                android:id="@+id/coordInscr"
-                android:layout_width="171dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="34dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/eventMapFrame"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_description"
-                app:layout_constraintVertical_bias="1.0"
-                tools:text="coordInscr" />
-
-        </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

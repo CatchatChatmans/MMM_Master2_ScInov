@@ -36,7 +36,8 @@ public class Event implements Parcelable {
     private Map<String,Double> ratings = new HashMap<>();
     private double avgRating = 0;
     private String lienInscription;
-    private String lien;
+    private int seatsAvailable;
+    private int seatsTaken;
 
 
     public Event() {
@@ -249,6 +250,25 @@ public class Event implements Parcelable {
         this.ratings = ratings;
     }
 
+    @PropertyName("seatsAvailable")
+    public int getSeatsAvailable() {
+        return seatsAvailable;
+    }
+
+    @PropertyName("seatsTaken")
+    public void setSeatsAvailable(int seatsAvailable) {
+        this.seatsAvailable = seatsAvailable;
+    }
+
+    @PropertyName("seatsAvailable")
+    public int getSeatsTaken() {
+        return seatsTaken;
+    }
+
+    @PropertyName("seatsTaken")
+    public void setSeatsTaken(int seatsTaken) {
+        this.seatsTaken = seatsTaken;
+    }
 
     @PropertyName("lien_d_inscription")
     public String getLienInscription() {
