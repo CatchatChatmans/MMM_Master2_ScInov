@@ -3,6 +3,7 @@ package fr.istic.mmm.scinov.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
@@ -73,6 +74,7 @@ public class Event implements Parcelable {
         this.type = type;
     }
 
+    @Exclude
     public String getSimpleType() {
         String simpleType ="";
         if(type != null){
@@ -146,6 +148,7 @@ public class Event implements Parcelable {
         this.dates = dates;
     }
 
+    @Exclude
     public List<Date> getFormattedDates() {
         String[] arr = dates.split(";");
         List<Date> list = new ArrayList<>();
@@ -255,12 +258,12 @@ public class Event implements Parcelable {
         return seatsAvailable;
     }
 
-    @PropertyName("seatsTaken")
+    @PropertyName("seatsAvailable")
     public void setSeatsAvailable(int seatsAvailable) {
         this.seatsAvailable = seatsAvailable;
     }
 
-    @PropertyName("seatsAvailable")
+    @PropertyName("seatsTaken")
     public int getSeatsTaken() {
         return seatsTaken;
     }

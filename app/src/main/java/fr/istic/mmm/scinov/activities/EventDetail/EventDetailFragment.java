@@ -28,6 +28,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,12 +41,14 @@ import fr.istic.mmm.scinov.activities.Journey.fragment.JourneyDialogFragment;
 import fr.istic.mmm.scinov.activities.Login.LoginFragment;
 import fr.istic.mmm.scinov.model.Event;
 import fr.istic.mmm.scinov.model.EventViewModel;
+import fr.istic.mmm.scinov.model.FirebaseQueryLiveData;
 
 public class EventDetailFragment extends Fragment {
 
     private Event event;
     private EventViewModel viewModel;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private static final DatabaseReference EVENT_REF = FirebaseDatabase.getInstance().getReference("/users");
 
     public EventDetailFragment() {
     }
@@ -101,7 +106,9 @@ public class EventDetailFragment extends Fragment {
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
         TextView eventCoord = view.findViewById(R.id.coordInscr);
+        TextView eventSeatsLeft = view.findViewById(R.id.details_seats_left);
         Button eventSearchButton = view.findViewById(R.id.link);
+        ImageView updateSeats = view.findViewById(R.id.update_seats);
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme().replaceAll("\\|", ", "));
@@ -111,6 +118,7 @@ public class EventDetailFragment extends Fragment {
         if(event.getLienInscription() != null)
             eventCoord.setText("Coordonées d'inscriptions: "+event.getLienInscription());
         eventSearchButton.setOnClickListener(this::searchButton);
+        eventSeatsLeft.setText((event.getSeatsAvailable() - event.getSeatsTaken()) + " places restantes");
 
 
         Picasso.get().load(event.getImageUrl()).into(eventImage);
@@ -145,6 +153,28 @@ public class EventDetailFragment extends Fragment {
             });
             addToJourney.setOnClickListener(v -> {
                 showSnackbarLogin(view);
+            });
+        }
+
+        updateSeats.setVisibility(View.GONE);
+
+        if(auth.getCurrentUser() != null){
+            Log.i("USER ROLE", auth.getCurrentUser().getUid());
+            FirebaseQueryLiveData userLiveData = new FirebaseQueryLiveData(EVENT_REF.child(auth.getCurrentUser().getUid()));
+            userLiveData.observe(this, new Observer<DataSnapshot>() {
+                @Override
+                public void onChanged(@Nullable DataSnapshot dataSnapshot) {
+                    String role = (String) dataSnapshot.getValue();
+                    Log.i("USER ROLE", role);
+                    if (role.equals("admin")){
+                        updateSeats.setVisibility(View.VISIBLE);
+                        updateSeats.setOnClickListener(v -> {
+                            UpdateSeatsDialogFragment usdf = UpdateSeatsDialogFragment.newInstance(event);
+                            usdf.show(getFragmentManager(), null);
+                        });
+                    }
+
+                }
             });
         }
 
