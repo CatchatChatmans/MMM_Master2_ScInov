@@ -3,6 +3,8 @@ package fr.istic.mmm.scinov.helpers;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class Filter implements Parcelable {
 
     private boolean filterByName;
@@ -10,6 +12,7 @@ public class Filter implements Parcelable {
     private boolean filterByTheme;
     private boolean filterByDescription;
     private boolean filterByKeyword;
+    private Date date;
 
     public Filter() {
         filterByName = true;
@@ -17,6 +20,7 @@ public class Filter implements Parcelable {
         filterByTheme = true;
         filterByDescription = true;
         filterByKeyword = true;
+        date = null;
     }
 
     protected Filter(Parcel in) {
@@ -77,6 +81,14 @@ public class Filter implements Parcelable {
 
     public void setFilterByKeyword(boolean filterByKeyword) {
         this.filterByKeyword = filterByKeyword;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override

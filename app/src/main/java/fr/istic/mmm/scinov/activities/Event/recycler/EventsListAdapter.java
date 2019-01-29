@@ -66,19 +66,33 @@ public class EventsListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     }
 
     public void filter(String query) {
+
+        Log.i("FILTER_DATE", "Filtering");
         list.clear();
-        if(query.isEmpty()){
+        if(query.isEmpty() && filter.getDate() == null){
+            Log.i("FILTER_DATE", "no filter");
             list.addAll(listCopy);
         }else{
-            query = query.toLowerCase();
             for(Event event: listCopy){
-                if((event.getName() != null && filter.isFilterByName() && event.getName().toLowerCase().contains(query))
-                || (event.getCity() != null && filter.isFilterByPlace() && event.getCity().toLowerCase().contains(query))
-                || (event.getDescription() != null && filter.isFilterByDescription() && event.getDescription().toLowerCase().contains(query))
-                || (event.getKeywords() != null && filter.isFilterByKeyword() && event.getKeywords().toLowerCase().contains(query))
-                || (event.getTheme() != null && filter.isFilterByTheme() && event.getTheme().toLowerCase().contains(query))){
-                    list.add(event);
+//                Log.i("FILTER_DATE", event.getFormattedDates().toString());
+//                Log.i("FILTER_DATE", filter.getDate().toString());
+                if((filter.getDate() == null || (event.getFormattedDates().size() != 0 && event.getFormattedDates().contains(filter.getDate())))){
+                    if(query.isEmpty()){
+                        Log.i("FILTER_DATE", "no query");
+                        list.add(event);
+                    }else{
+                        Log.i("FILTER_DATE", "with query");
+                        query = query.toLowerCase();
+                        if((event.getName() != null && filter.isFilterByName() && event.getName().toLowerCase().contains(query))
+                                || (event.getCity() != null && filter.isFilterByPlace() && event.getCity().toLowerCase().contains(query))
+                                || (event.getDescription() != null && filter.isFilterByDescription() && event.getDescription().toLowerCase().contains(query))
+                                || (event.getKeywords() != null && filter.isFilterByKeyword() && event.getKeywords().toLowerCase().contains(query))
+                                || (event.getTheme() != null && filter.isFilterByTheme() && event.getTheme().toLowerCase().contains(query))){
+                            list.add(event);
+                        }
+                    }
                 }
+
             }
         }
         notifyDataSetChanged();

@@ -24,10 +24,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import fr.istic.mmm.scinov.R;
@@ -183,12 +186,30 @@ public class EventsFragment extends Fragment implements FilterDialogFragment.Fil
         CheckBox checkBoxThemes = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_theme);
         CheckBox checkBoxDescription = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_description);
         CheckBox checkBoxKeywords = ((Dialog)dialog).findViewById(R.id.dialog_filter_checkbox_keywords);
+        TextView datePicked = ((Dialog)dialog).findViewById(R.id.dialog_filter_date_chosen);
 
         adapter.getFilter().setFilterByName(checkBoxName.isChecked());
         adapter.getFilter().setFilterByPlace(checkBoxPlace.isChecked());
         adapter.getFilter().setFilterByTheme(checkBoxThemes.isChecked());
         adapter.getFilter().setFilterByDescription(checkBoxDescription.isChecked());
         adapter.getFilter().setFilterByKeyword(checkBoxKeywords.isChecked());
+
+        String dateString = datePicked.getText().toString();
+        Date date;
+
+        Log.i("FILTER_DATE", "onDialogPositiveClick");
+
+        if(!dateString.isEmpty()){
+            try{
+                date = (new SimpleDateFormat("dd/mm/yyyy").parse(dateString));
+                Log.i("DATE FILTER_DATE", date.toString());
+                adapter.getFilter().setDate(date);
+            }catch (Exception e){
+                Log.i("EXCEPTION", e.getMessage());
+            }
+        }else{
+            date = null;
+        }
 
         adapter.filter(currentSearchQuery);
     }

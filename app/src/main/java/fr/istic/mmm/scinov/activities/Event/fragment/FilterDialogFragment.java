@@ -1,5 +1,6 @@
 package fr.istic.mmm.scinov.activities.Event.fragment;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,8 +11,14 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import fr.istic.mmm.scinov.R;
 import fr.istic.mmm.scinov.helpers.Filter;
@@ -43,12 +50,43 @@ public class FilterDialogFragment extends DialogFragment {
         ((CheckBox) filterForm.findViewById(R.id.dialog_filter_checkbox_description)).setChecked(filter.isFilterByDescription());
         ((CheckBox) filterForm.findViewById(R.id.dialog_filter_checkbox_keywords)).setChecked(filter.isFilterByKeyword());
 
+        TextView datePicker = filterForm.findViewById(R.id.dialog_filter_date_picker);
+        TextView dateChosen = filterForm.findViewById(R.id.dialog_filter_date_chosen);
+
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                c.set(Calendar.HOUR_OF_DAY,0);
+                c.set(Calendar.MINUTE,0);
+                c.set(Calendar.SECOND,0);
+                c.set(Calendar.MILLISECOND,0);
+                c.setTimeZone(TimeZone.getTimeZone("GMT+2"));
+
+                DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dateChosen.setText(dayOfMonth + "/" + (month +1) + "/" + year);
+                    }
+                }, year, month, day);
+                dpd.show();
+
+//                DialogFragment newFragment = new DatePickerFragment();
+//                newFragment.show(getChildFragmentManager(), "datePicker");
+            }
+        });
+
         Log.i("FILTER_DIALOG", "onCreateDialog");
 
         builder.setTitle(R.string.dialog_filter_title)
                 .setView(filterForm)
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Log.i("FILTER_DATE", "onClick");
                         mListener.onDialogPositiveClick(dialog);
                     }
                 })
