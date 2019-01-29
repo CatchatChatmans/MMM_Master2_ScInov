@@ -39,6 +39,14 @@ Thanks to the following tools:
 
 The powerfull open source library [Picasso](http://square.github.io/picasso/)
 
+#
+
+## Find out more
+
+[/Doc](https://github.com/PosnicAntoine/MMM_Master2_ScInov/tree/master/Doc) possédes quelques informations sur l'architecture de l'application.
+
+#
+
 ## Authors
 
 
