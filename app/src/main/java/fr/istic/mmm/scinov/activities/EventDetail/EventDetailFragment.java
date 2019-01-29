@@ -200,6 +200,7 @@ public class EventDetailFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable DataSnapshot dataSnapshot) {
                     String role = (String) dataSnapshot.getValue();
+                    if (role == null) return;
                     Log.i("USER ROLE", role);
                     if (role.equals("admin")){
                         updateSeats.setVisibility(View.VISIBLE);
