@@ -11,14 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
@@ -115,7 +112,7 @@ public class ClusteredMapFragment extends Fragment {
         Objects.requireNonNull(list);
         list.forEach(event -> {
             if(event.getGeolocation() != null && !event.getGeolocation().isEmpty()) {
-                EventsCluster offsetItem = new EventsCluster(event.getGeolocation().get(0), event.getGeolocation().get(1), event.getName(), event.getDescriptionShort(), event);
+                EventsCluster offsetItem = new EventsCluster(event.getGeolocation().get(0), event.getGeolocation().get(1), event.getName(), event.getAddress(), event);
                 mClusterManager.addItem(offsetItem);
             }
         });

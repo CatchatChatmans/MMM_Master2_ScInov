@@ -1,7 +1,6 @@
 package fr.istic.mmm.scinov.activities.EventDetail;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,16 +15,9 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.clustering.ClusterManager;
-
-import java.util.List;
-import java.util.Objects;
 
 import fr.istic.mmm.scinov.R;
-import fr.istic.mmm.scinov.activities.Home.EventsFragment;
-import fr.istic.mmm.scinov.activities.Map.EventsCluster;
 import fr.istic.mmm.scinov.model.Event;
-import fr.istic.mmm.scinov.model.EventViewModel;
 
 public class MapNestedFragment extends Fragment {
 
@@ -69,7 +61,7 @@ public class MapNestedFragment extends Fragment {
 
         // For dropping a marker at a point on the Map
         LatLng eventLocation = new LatLng(event.getGeolocation().get(0), event.getGeolocation().get(1));
-        googleMap.addMarker(new MarkerOptions().position(eventLocation).title("Marker Title").snippet("Marker Description"));
+        googleMap.addMarker(new MarkerOptions().position(eventLocation).title(event.getName()).snippet(event.getAddress()));
 
         // For zooming automatically to the location of the marker
         CameraPosition cameraPosition = new CameraPosition.Builder().target(eventLocation).zoom(12).build();
