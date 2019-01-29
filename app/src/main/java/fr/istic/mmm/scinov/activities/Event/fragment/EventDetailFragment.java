@@ -51,6 +51,7 @@ public class EventDetailFragment extends Fragment {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private static final DatabaseReference EVENT_REF = FirebaseDatabase.getInstance().getReference("/users");
     private TextView eventWebsite;
+    private View mainView;
 
     public EventDetailFragment() {
     }
@@ -98,6 +99,8 @@ public class EventDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mainView = view;
 
         TextView eventName = view.findViewById(R.id.detailsName);
         TextView eventTheme = view.findViewById(R.id.detailsTheme);
@@ -217,7 +220,7 @@ public class EventDetailFragment extends Fragment {
         ((MainActivity) getActivity()).getSupportActionBar().hide();
         Toolbar toolbar = view.findViewById(R.id.event_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle(event.getName());
+        toolbar.setTitle(event.getName());;
 
         //fix for the title display issue
         CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar_layout);
@@ -261,6 +264,16 @@ public class EventDetailFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+        Toolbar toolbar = mainView.findViewById(R.id.event_toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        toolbar.setTitle(event.getName());
     }
 
     private boolean hideInfoIfNull(TextView textView, ImageView imageView){

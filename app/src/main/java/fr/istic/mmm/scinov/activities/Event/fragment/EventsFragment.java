@@ -117,6 +117,10 @@ public class EventsFragment extends Fragment implements FilterDialogFragment.Fil
         SearchView searchView = (SearchView) menuSearchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
+//        TextView textView = (TextView) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+//        textView.setTextColor(Color.WHITE);
+//        textView.setHintTextColor(Color.WHITE);
+
         adapter.setMenuSearchItem(menuSearchItem);
         MyUtil.clickOutsideToUnfocusSearch(getActivity().findViewById(R.id.activity_drawer),menuSearchItem);
 
