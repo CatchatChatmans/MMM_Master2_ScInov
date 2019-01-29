@@ -38,16 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/details_description" />
 
-    <View
-        android:id="@+id/separator_04"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addr" />
-
     <TextView
         android:id="@+id/detailsName"
         android:layout_width="0dp"
@@ -124,7 +114,7 @@
         tools:text="Description" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ic_info_dates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -133,58 +123,58 @@
         app:srcCompat="@drawable/ic_event_02" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ic_info_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/ic_info_dates"
         app:layout_constraintTop_toBottomOf="@+id/dates"
         app:srcCompat="@drawable/ic_phone" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/ic_info_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/ic_info_dates"
         app:layout_constraintTop_toBottomOf="@+id/details_phone"
         app:srcCompat="@drawable/ic_email" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/ic_info_website"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="@+id/ic_info_dates"
+        app:layout_constraintTop_toBottomOf="@+id/details_email"
         app:srcCompat="@drawable/ic_nav_map" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ic_info_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/ic_info_dates"
+        app:layout_constraintTop_toBottomOf="@+id/details_seats_left"
         app:srcCompat="@drawable/ic_place" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/ic_info_seats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/ic_info_dates"
+        app:layout_constraintTop_toBottomOf="@+id/details_website"
         app:srcCompat="@drawable/ic_event_seat" />
 
     <FrameLayout
         android:id="@+id/eventMapFrame"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/link">
+        app:layout_constraintTop_toBottomOf="@+id/addr">
 
     </FrameLayout>
 
@@ -224,8 +214,8 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ic_info_dates"
+        app:layout_constraintTop_toTopOf="@+id/ic_info_dates"
         tools:text="Dates" />
 
     <TextView
@@ -235,21 +225,8 @@
         android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="@+id/details_phone"
         app:layout_constraintStart_toStartOf="@+id/details_phone"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/ic_info_place"
         tools:text="Address" />
-
-    <Button
-        android:id="@+id/link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:text="Visiter le site"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator_04" />
 
     <TextView
         android:id="@+id/details_phone"
@@ -257,8 +234,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/dates"
         app:layout_constraintStart_toStartOf="@+id/dates"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        tools:text="coordInscr" />
+        app:layout_constraintTop_toTopOf="@+id/ic_info_phone"
+        tools:text="Phone" />
 
     <ImageView
         android:id="@+id/update_seats"
@@ -276,10 +253,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/dates"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+        app:layout_constraintStart_toEndOf="@+id/ic_info_email"
+        app:layout_constraintTop_toTopOf="@+id/ic_info_email"
+        tools:text="Email" />
 
     <TextView
         android:id="@+id/details_website"
@@ -287,10 +264,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/dates"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintStart_toEndOf="@+id/ic_info_website"
+        app:layout_constraintTop_toTopOf="@+id/ic_info_website"
+        tools:text="Website" />
 
     <TextView
         android:id="@+id/details_seats_left"
@@ -298,21 +275,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/dates"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-    <TextView
-        android:id="@+id/control"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator_03" />
+        app:layout_constraintStart_toEndOf="@+id/ic_info_place"
+        app:layout_constraintTop_toTopOf="@+id/ic_info_seats"
+        tools:text="Seats" />
 
 </android.support.constraint.ConstraintLayout>
 

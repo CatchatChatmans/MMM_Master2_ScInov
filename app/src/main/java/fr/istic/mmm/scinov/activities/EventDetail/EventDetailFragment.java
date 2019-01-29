@@ -22,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -51,6 +50,7 @@ public class EventDetailFragment extends Fragment {
     private EventViewModel viewModel;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private static final DatabaseReference EVENT_REF = FirebaseDatabase.getInstance().getReference("/users");
+    private TextView eventWebsite;
 
     public EventDetailFragment() {
     }
@@ -108,12 +108,11 @@ public class EventDetailFragment extends Fragment {
         ImageView addToJourney = view.findViewById((R.id.addJourney));
         RatingBar ratingView = view.findViewById((R.id.details_rating));
         TextView eventSeatsLeft = view.findViewById(R.id.details_seats_left);
-        Button eventSearchButton = view.findViewById(R.id.link);
+
         ImageView updateSeats = view.findViewById(R.id.update_seats);
         TextView eventEmail = view.findViewById(R.id.details_email);
         TextView eventPhone = view.findViewById(R.id.details_phone);
-        TextView eventWebsite = view.findViewById(R.id.details_website);
-        TextView control = view.findViewById(R.id.control);
+        eventWebsite = view.findViewById(R.id.details_website);
 
         eventName.setText(event.getName());
         eventTheme.setText(event.getTheme().replaceAll("\\|", ", "));
@@ -121,7 +120,6 @@ public class EventDetailFragment extends Fragment {
         eventDates.setText(event.getHours());
         eventDescription.setText(event.getDescription());
         if(event.getLienInscription() != null){
-            control.setText(event.getLienInscription());
             Matcher matcherEmail = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(event.getLienInscription());
             while (matcherEmail.find()) {
                 eventEmail.setText(matcherEmail.group());
@@ -130,16 +128,33 @@ public class EventDetailFragment extends Fragment {
             while (matcherPhone.find()) {
                 eventPhone.setText(matcherPhone.group());
             }
-            Matcher matcherWebsite = Pattern.compile("(?:^|[^@\\.\\w-])((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*").matcher(event.getLienInscription());
-            while (matcherWebsite.find()) {
-                eventWebsite.setText(matcherWebsite.group());
-            }
+//            Matcher matcherWebsite = Pattern.compile("(?:^|[^@\\.\\w-])((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*").matcher(event.getLienInscription());
+//            while (matcherWebsite.find()) {
+//                eventWebsite.setText(matcherWebsite.group());
+//            }
         }
 
-        eventSearchButton.setOnClickListener(this::searchButton);
-        eventSeatsLeft.setText((event.getSeatsAvailable() - event.getSeatsTaken()) + " places restantes");
+        if(!event.getLink().isEmpty()){
+            eventWebsite.setText(event.getLink());
+        }
 
+        if(event.getSeatsAvailable() != 0){
+            eventSeatsLeft.setText((event.getSeatsAvailable() - event.getSeatsTaken()) + " places restantes");
+        }
 
+        eventWebsite.setOnClickListener(this::manageClick);
+        eventAddr.setOnClickListener(this::manageClick);
+        eventPhone.setOnClickListener(this::manageClick);
+        eventDates.setOnClickListener(this::manageClick);
+        eventEmail.setOnClickListener(this::manageClick);
+        eventSeatsLeft.setOnClickListener(this::manageClick);
+
+        hideInfoIfNull(eventDates, view.findViewById(R.id.ic_info_dates));
+        hideInfoIfNull(eventPhone, view.findViewById(R.id.ic_info_phone));
+        hideInfoIfNull(eventEmail, view.findViewById(R.id.ic_info_email));
+        hideInfoIfNull(eventWebsite, view.findViewById(R.id.ic_info_website));
+        hideInfoIfNull(eventAddr, view.findViewById(R.id.ic_info_place));
+        hideInfoIfNull(eventSeatsLeft, view.findViewById(R.id.ic_info_seats));
 
         Picasso.get().load(event.getImageUrl()).into(eventImage);
 
@@ -219,15 +234,19 @@ public class EventDetailFragment extends Fragment {
         mySnackbar.show();
     }
 
-    public void searchButton(View view){
-        Log.i("SearchButtonClicked","addr:"+event.getLink());
-
-        if(event.getLink() != null) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
-            startActivity(intent);
-        }else{
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.fetedelascience.fr/"));
-            startActivity(intent);
+    public void manageClick(View view){
+        switch (view.getId()){
+            case R.id.details_website:
+                Log.i("DO STUFF","go to website");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
+                startActivity(intent);
+                break;
+            case R.id.details_phone:
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ((TextView) view).getText().toString()));
+                startActivity(intentCall);
+                break;
+            default:
+                    break;
         }
     }
 
@@ -241,5 +260,14 @@ public class EventDetailFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+    }
+
+    private boolean hideInfoIfNull(TextView textView, ImageView imageView){
+        if(textView.getText().toString().isEmpty()){
+            textView.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+            return true;
+        }
+        return false;
     }
 }
